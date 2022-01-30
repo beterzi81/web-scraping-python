@@ -1,9 +1,4 @@
-import pwd
-from re import sub
-from bs4 import BeautifulSoup
-import requests
 import urllib.request
-import sys
 import subprocess
 '''
 #########################Linkleri listeye aktarma##########################
