@@ -1,7 +1,10 @@
+from base64 import encode
+from distutils import errors
 import urllib.request
 import subprocess
 import os
 from urllib.parse import urlparse
+import re
 
 #########################Linkleri listeye aktarma##########################
 #önce linkleri tek tip haline getirmemiz laızm
@@ -34,14 +37,15 @@ for i in isimArray:#her isim için aynı adda bir klasör oluşturuldu,1 kez yap
     subprocess.run(command, capture_output=True, shell=True)
 '''
 #########################Linklere gidip html içeriğini alma##########################
-os.chdir("Indirilebilen-htmller")
-sayac=0
+os.chdir("Indirilebilen-htmller")#deneme için şimdilik indirmeleri buraya yapıyoruz
+sayac=0#bu da tamamen şimdilik indirebilen htmlleri adlandırmak için koyulmuş bir sayaç
 for i in duzenliLinkler:
     r= urllib.request.urlopen(i)
     test=r.read()
-    a=test.decode("utf-8")#bu şekilde yazınca 8. linkte UnicodeDecodeError: 'utf-8' codec can't decode byte 0xdd in position 114: invalid continuation byte hatası alıyorum bu hatayı aşmak için aşağıdaki satırı yazınca da karakterler dönüşmüyor ve yazı okunmuyor
-    #a=test.decode('unicode_escape').encode('utf-8') # ayrıca bu kodla çalıştırınca da 32. sitede urllib.error.HTTPError: HTTP Error 403: Forbidden hatası alıyorum
+    a=test.decode("utf-8",errors='ignore')#bu şekilde yazınca 8. linkte UnicodeDecodeError: 'utf-8' codec can't decode byte 0xdd in position 114: invalid continuation byte hatası alıyorum(bu hatayı, decode fonksiyonunun içinde errors='ignore' parametresi vererek çözdüm)     
+    # ayrıca bu kodla çalıştırınca da 32. sitede urllib.error.HTTPError: HTTP Error 403: Forbidden hatası alıyorum
     #45-50 arası siteleri indirebiliyor muyum denemek için yazıldı simüle satırları onlar. normalde hepsini kendi klasörüne indireceğim
+    
     temp=str(sayac)+".html"
     sayac+=1
     saveFile = open(temp,"w")
@@ -53,14 +57,22 @@ for i in duzenliLinkler:
     process2=subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)#o an bakıp belleğe aldığımız htmldeki bütün yönlendirme linklerini bulduk
     temp=process2.communicate()[0]
     insideLinks=temp.decode()
-    insideLinksArray=insideLinks.split('\n')#Bu iç linkleri bir arraye atadık
-    insideLinksArray=list(dict.fromkeys(insideLinksArray))#tekrarlayan değerleri kaldırdık
-    insideLinksArray= list(filter(None, insideLinksArray))#null yani boş string değerlerini de kaldırdık
-    #print(insideLinksArray)#bunu yaptığımızda index sayfamızda index hariç bütün referans verilen linkleri buluyor ve index olanları çıkarıyor, ardından da html isimlerini alıyor. bu print de o htmlleri tutan listeyi yazıyor
+    unfilteredInsideLinks=insideLinks.split('\n')
+    
+    FilteredInsideLinksArray=[]
+    
+    for i in unfilteredInsideLinks:
+        if re.search(r'[.]html$',i):
+            FilteredInsideLinksArray.append(i)
+
+    #Bu iç linklerin html uzantılı olanlarını bir arraye atadık çünkü arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
+    FilteredInsideLinksArray=list(dict.fromkeys(FilteredInsideLinksArray))#tekrarlayan değerleri kaldırdık
+    FilteredInsideLinksArray= list(filter(None, FilteredInsideLinksArray))#null yani boş string değerlerini de kaldırdık
+    #print(FilteredInsideLinksArray)#bunu yaptığımızda index sayfamızda index hariç bütün referans verilen linkleri buluyor ve index olanları çıkarıyor, ardından da html isimlerini alıyor. bu print de o htmlleri tutan listeyi yazıyor
 
     #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
     os.chdir("/Siteler")
-    for j in insideLinksArray:
+    for j in FilteredInsideLinksArray:
         os.chdir("/"+j)
         req= urllib.request.urlopen(i + "/" + j)
         test=req.read()
