@@ -1,101 +1,367 @@
-<http.client.HTTPResponse object at 0x1037edfa0>
-<http.client.HTTPResponse object at 0x10386e8b0>
-<http.client.HTTPResponse object at 0x1037edca0>
-<http.client.HTTPResponse object at 0x10386ea00>
-<http.client.HTTPResponse object at 0x1037edb50>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386ea00>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386eaf0>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386ea00>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386eaf0>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386eaf0>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386e970>
-<http.client.HTTPResponse object at 0x10386e0d0>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386e970>
-<http.client.HTTPResponse object at 0x10386e0d0>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386e970>
-<http.client.HTTPResponse object at 0x10386e0d0>
-<http.client.HTTPResponse object at 0x10386e8b0>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386e8b0>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386e8b0>
-<http.client.HTTPResponse object at 0x10386eb20>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386e910>
-<http.client.HTTPResponse object at 0x10386e9a0>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386eaf0>
-<http.client.HTTPResponse object at 0x10386e9a0>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386e9a0>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386e9a0>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386e9a0>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386eaf0>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386eaf0>
-<http.client.HTTPResponse object at 0x10386ea30>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386eaf0>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386e970>
-<http.client.HTTPResponse object at 0x10386eb80>
-<http.client.HTTPResponse object at 0x10386e8b0>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386e0d0>
-<http.client.HTTPResponse object at 0x10386e910>
-<http.client.HTTPResponse object at 0x10386e8b0>
-<http.client.HTTPResponse object at 0x10386e910>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386e850>
-<http.client.HTTPResponse object at 0x10386e8b0>
-<http.client.HTTPResponse object at 0x10386e910>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386e910>
-<http.client.HTTPResponse object at 0x10386e970>
-<http.client.HTTPResponse object at 0x10386ea60>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386e910>
-<http.client.HTTPResponse object at 0x10386e970>
-<http.client.HTTPResponse object at 0x10386e910>
-<http.client.HTTPResponse object at 0x10386e070>
-<http.client.HTTPResponse object at 0x10386e910>
-<http.client.HTTPResponse object at 0x10386e970>
+<html>
+<head>
+<title>index.html</title>
+<meta charset="utf-8">
+<link rel="icon" href="fitness_health_power_strong_strength_gym_exercise_arm_hand_muscle-128.jpg" type="image/x-icon"
+</head>
+
+<body background="1451f6d15620af37a0a5df2960a735d5.jpg">
+<br>
+<table width="2105" border="0" align="center" cellspacing="0" cellpadding="0">
+  <tr height="50" bgcolor="#FF0004">
+    <td></td>
+	
+	
+	  
+  </tr>
+</table>
+<br><br><br><br><br><br>
+<table width="1400" align="center" border="7">
+
+    <tr>
+		<td height="300" width="1000"><font size="3" color="#00CBFF" ><h1>Başlamak için mükemmel olmak zorunda değilsin <br> <br><center>Ama</center> <br>mükemmel olmak için başlamak zorundasın.</h1></font></td>
+		<td><img src="başlık.png" height="400"></td>
+    </tr>
+	
+  
+</table >
+	
+
+	<table width="1700" border="0" align="center">
+  
+    <tr>
+      <td height="480"><font size="5" color="#ffa8a8">Fitness ingilizceden dilimize direkt olarak geçen bir kelimedir.Anlamı sağlık,sağlıklı yaşamdır.Genellikle fitness için gerekli olan aletlerin olduğu mekanlarda yapılır.Fitness yapmak kişiye göre farklı amaçlar taşıyabilir.Bunlar sağlıklı olmak ve hissetmek,sağlık problemleri düzeltmek,profesyonel yarışmalara katılmak ve fit görünmek vb'dir.Fitness genellikle aletlerle yapılır,vucüdu sıkıştırarak kasların yıpranmasına ve yırtılmasına yol açar.Doğru bir beslenme ile bu yırtılan kasların yerine daha büyük kas kütleli kaslar oluşur.Böylece kas kütlemiz artar.Buna halk arasında "kaslarım büyüdü" denir.Bunların yanında vücudumuza birçok faydası vardır:</font><br><br><br><font size="6" color="#00CBFF"><ol><li><font color="#ffa8a8">Bağışıklık sistemini güçlendirir.</font></li>
+		  <li><font color="#ffa8a8">Yoğun bir şekilde endorfin,testesteron ve östrojen salgılanmasını sağlar.</font></li><li><font color="#ffa8a8">Salgılanan hormonlar sayesinde kişiyi mutlu hissettirir.</font></li><li><font color="#ffa8a8">kan dolaşımını hızlandırır.</font></li><li><font color="#ffa8a8">vücuttaki toksinlerin atılmasına yardımcı olur.</font></li></ol></font></td>
+    </tr>
+		<br><br><table width="1700" border="3" align="center">
+  
+    <tr>
+      <td width="566" align="left"><img name="diyet" src="gunluk-kalori-protein-yag-karbonhidrat-365x235.jpg"></td>
+		<td align="center" width="568"><img name="kasadam" src="maxresdefault.jpg"></td>
+		<td align="right" width="566"><img name="sporsalonu" src="79e0cd93eac4486ebb82e170384b71b9_3_1400.jpeg"></td>
+    </tr>
+  
+</table>
+
+ 
+</table>
+	
+<br><br><br><br>
+	<table align="center" width="1700"><tr><td>
+<font size="5" color="#ffa8a8">Fitnessta vücut geliştirilirken vücut bölümlere ayrılır.Her bölgenin hareketleri farklıdır:bacak,kalça,bel,karın,sırt,omuz,göğüs,kol.Bu bölümleri çalışırken yaptığımız hareketlerde duruş çok önemlidir.Bir hareketi yaparken aleti tutuş açımıza göre bile çalıştığımız kasımızın farklı bölümlerine etki etmiş oluruz.Bir bölgeyi çalıştıran birden fazla hareket olabilir fakat kasımıza yaptığı etki aynı olmayabilir.Bu yüzden seçtiğimiz hareketlerde dikkatli olmalıyız.Fitnessta hareketler setlere ve tekrarlara ayrılır.Genellikte set aralarında 30-45 saniye dinlenme olur.Tekrarlarda ise gerilimi arttırmak için ağırlığı itince veya çekince(yaptığımız harekete göre değişir) 1-3 saniye bekleyebiliriz.Burada size fitnessta kendi yaptığım bölgelere göre hareketleri göstericeğim.</font></td> </tr></table><br><br><br>
+	
+<table width="1700" border="1" align="center">
+  
+    <tr>
+      <td align="center" height="120"><a href="bacak sayfam.html" name="bacak"><font size="3" color="#00CBFF">Bacak Hareketleri</font></a></td>
+      <td align="center" height="120"><a href="bel-karın.html" name="bel ve karın"><font size="3" color="#00CBFF">Bel ve karın Hareketleri </font></a></td>
+      <td align="center" height="120"><a href="göğüs ve sırt.html" name="göğüs ve sırt "><font size="3" color="#00CBFF">Göğüs ve sırt HAreketleri</font></a></td>
+      <td align="center" height="120"><a href="omuz ve kollar.html" name="Kol ve omuz"><font size="3" color="#00CBFF">Kol ve omuz Hareketleri</font></a></td>
+    </tr>
+  
+</table>
+  <br><br><br><br><br><br>
+
+<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>
+</body>
+</html>
+*****************************************************************************************************************************
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Abdulkadir Oruç</title>
+</head>
+<body bgcolor="#e5e5e5">
+<table border="1" width="1000" align="center" cellspacing="0">
+<tr height="120">
+<td colspan="5" align="center" background="images/greyyy.jpg"><marquee direction=right><b><font face="Times New Roman" size="6" color="#ffffff">Abdulkadir Oruç<br></font></b></marquee></td>
+</tr>
+<tr bgcolor="#f0f0f0" height="50">
+<td align="center"><a href="index.html">Anasayfa</a></td>
+<td align="center"><a href="Doga Fotograflarim.html">Doğa Fotoğrafları</a></td>
+<td align="center"><a href="Film Onerileri.html">Film Önerileri</a></td>
+<td align="center"><a href="Kitap Onerileri.html">Kitap Önerileri</a></td>
+<td align="center"><a href="Hakkimda.html">Hakkımda</a></td>
+</tr>
+<tr height="900">
+<td colspan="5" bgcolor="#ffffff"><a href="Film Onerileri.html"><img src="images/movie.jpg" height="250" title="Filmler"></a><p align="center"><a href="Doga Fotograflarim.html"><img src="images/scenery.png" width="300" title="Doğa Fotoğrafları"></a></p><a href="Kitap Onerileri.html"><img src="images/kitap.jpg" height="250" title="Kitaplar" align="right"></a><br><br><br><br><br></td>
+</tr>
+<tr>
+<td colspan="5" height="20" align="center" bgcolor="grey"><font size="4">İLETİŞİM</font</td>
+</tr>
+<tr>
+<td colspan="5" height="150">
+<table border="0" width="1000" height="150" cellspacing="0">
+<tr bgcolor="#ffffff">
+<td><p align="center"><font size="4">MAIL:kadiroruc587@gmail.com</font></p></td>
+<td><a href="https://tr.linkedin.com/in/abdulkadir-oru%C3%A7-6aaa03223?trk=people-guest_people_search-card" target="_blank"><p align="center"><font size="4">LINKEDIN</font></p></a></td>
+<td><a href="https://www.instagram.com/akadiroruc/" target="_blank"<p align="center"><font size="4">INSTAGRAM</font></p><a/></td>
+<td><a href="https://github.com/kadiroruc" target="_blank"<p align="center"><font size="4">GITHUB</font></p></a></td>
+</tr>
+</table></td>
+</tr>
+</table>
+
+<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>
+</body>
+</html>*****************************************************************************************************************************
+<html>
+<head>
+<meta charset="utf-8">
+<title>Quentin Tarantino</title>
+</head>
+<body background="images/arkaplan4.jpg">
+<font color="#181C33" face="Verdana" size="+1"><h1 align="center">Quentin Tarantino</h1></font>
+<hr width="600" color="181C33"></hr>
+<table border="1" background="images/arkaplan10.jpg" align="center">
+<tr>
+<td height="360" width="480"><img src="images/tarantino5.jpg" title="tarantino" alt="tarantino" width="480" height="360"></td> 
+<td width="250">
+<table border="1" width="250" bgcolor="#B0C2DA">
+<tr>
+<td height="72"><a href="Pulp Fiction.html" target="_blank"><font color="181C33" size="5">Pulp Fiction</font></a><br><br>
+<a href="https://www.youtube.com/embed/s7EdQ4FqbhY" target="televizyon"><font color="#0F1C64" size="4">Fragmanı izlemek İçin Tıklayın</font></a></td></tr>
+<tr>
+<td height="72"><a href="Inglourious Basterds.html" target="_blank"><font color="181C33" size="5">Inglourious Basterds</font></a><br><br>
+<a href="https://www.youtube.com/embed/KnrRy6kSFF0" target="televizyon"><font color="#0F1C64" size="4">Fragmanı izlemek İçin Tıklayın</font></a></td></tr>
+<tr>
+<td height="72"><a href="Kill Bill vol.1.html" target="_blank"><font color="181C33" size="5">Kill Bill vol.1 </font></a><br><br>
+<a href="https://www.youtube.com/embed/LPLNjDDqVvY" target="televizyon"><font color="#0F1C64" size="4">Fragmanı izlemek İçin Tıklayın</font></a></td></tr>
+<tr>
+<td height="72"><a href="Reservoir Dogs.html" target="_blank"><font color="181C33" size="5">Reservoir Dogs</font></a><br><br>
+<a href="https://www.youtube.com/embed/vayksn4Y93A" target="televizyon"><font color="#0F1C64" size="4">Fragmanı izlemek İçin Tıklayın</font></a></td></tr>
+<tr>
+<td height="72"><a href="Django Unchained.html" target="_blank"><font color="181C33" size="5">Django Unchained</font></a><br><br>
+<a href="https://www.youtube.com/embed/0fUCuvNlOCg" target="televizyon"><font color="#0F1C64" size="4">Fragmanı izlemek İçin Tıklayın</a></td></tr>
+</table>
+</td>
+<td width="720"><iframe src="images/oynat.jpg" name="televizyon" width="720" height="360" scrolling="no"></iframe></td>
+</tr>
+<tr>
+<td height="320">
+<ul type="square"><i><font size="4">
+<li>Quentin Tarantino</li>
+<li>27 Mart 1963</li>
+<li>Knoxwille/Tennessee/ABD</li>
+<li>Yönetmen</li>
+<li>Aldığı Ödüller<br/>
+<ul tpye="circle">
+<li>En İyi Senaryo Altın Küre Ödülü</li>
+<li>Altın Palmiye</li>
+<li>En İyi Özgün Senaryo Akademi Ödülü</li>
+<li>En İyi Senaryo Altın Küre Ödülü</li>
+<li>BAFTA En İyi Özgün Senaryo Ödülü,</li>
+<li>Los Angeles Film Eleştirmenleri Birliği En İyi Yönetmen</li></font></i>
+</ul>
+</li>
+</ul>
+</td>
+<td colspan="2">
+<p>Quentin Jerome Tarantino (d. 27 Mart 1963), Amerikalı film yönetmeni, oyuncu ve iki Oscar ödüllü senaristtir. 
+Quentin Jerome Tarantino, filmlerini Hollywood klişelerininden farklı olarak  doğrusal olmayan öykü akışını, diyalogları ve kanlı şiddet sahnelerini cesurca kullanmasıyla 90’ların bağımsız sinemacılarından biri olarak tanınmıştır.
+</p>
+<b><u><font color="#6699ff" size="3">Hayatı</font></u></b>
+<p>27 Mart 1963’te Knoxville, Tennessee'de doğmuştur. Eğitim Hayatı 16 yaşına kadar sürmüştür, daha sonra okuldan ayrılarak James Best tiyatro grubuna katılmıştır. İlk senaryosunu henüz 22 yaşında yazmıştır. Daha sonraları ise acemi
+bir şekilde oyunculukla uğraşmıştır. Bir Hollywood partisinde tanıştığı Amerikalı film yapımcısı Lawrence Bender'in (teşekkürler Lawrence:)) cesaretlendirmesiyle o yıllarda çok ses getirmiş olan Reservoir Dogs'u kaleme almştır. Oldukça kan ve vahşet içeren bu film 
+eleştirmenlerden tam not almıştır. 
+</p>
+<p>Reservoir Dogs filmiyle yakaladığı başarının ardından adını duyuran Tarantino, Pulp Fiction senaryosu üzerine çalışmaya odaklanmıştır. 
+Tarantino, karmaşık kurgusal akış ve şiddet sahneleri barındıran yeni filmi Pulp Fiction ile 1994 Cannes Film Festivali’nde Altın Palmiye ödülünü kazanmış, Oscar Ödül Töreni’nden de En İyi Özgün Senaryo ödülü ile dönmüştür.
+Ayrıca sonraki yıllarda Cannes Film Festivali’nde jüri başkanlığı da yapmıştır.
+</p>
+<b><u><font color="#6699ff" size="3">Quentin Tarantino’nun Eserleri</font></u></b>
+<p>Tarantino'nun hem yönetmen hem de senarist olarak karşımıza çıktığı birçok eser vardır. Kariyerinde 17 filmin yönetmenliğini yapıp, 23 filmin ise senaryosunu yazmıştır. Ayrıca filmlerinde seçtiği müzikler her zaman beğenilmiş ve çokça alkış almıştır. 
+Bu filmlerden benim favorim olan 5 tanesi yukarda incelenmiştir. 
+Keyifli okumalar ve seyirler.
+</p>
+</td>
+</tr>
+</table>
+
+
+<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>
+</body>
+</html>
+*****************************************************************************************************************************<!DOCTYPE html>
+<html>
+<head>
+<title>Anasayfa</title>
+</head>
+<body >
+    <meta charset="UTF-8">
+    <table bgcolor="black" align="center" border="2" cellspacing="0" cellpaddin="0"  >
+
+        <tr bgcolor="white" >
+            <td align="center" rowspan="6" width="512"><img height="2048" width="512" src="28.png"></td>
+            <td bgcolor="black" colspan="2" width="1024" height="254"><img width="1024" height="254"src="1.png"></td>
+            <td align="center" rowspan="6" width="512"><img height="2048" width="512" src="28.1.png"></td>
+        </tr>
+
+        <tr>
+            <td bgcolor="black" colspan="2" align="center" height="40"><font face="Elephant" color="white" >****~~~~SİTEYE HOŞGELDİNİZ~~~~****</font></td>
+            
+        </tr>
+
+        <tr>
+            <td bgcolor="black" height="500" width="512" align="center"><img width="512"  height="500" src="3.jpg"><br/>
+                <a href="okculuknasilyapilir.html"><font color="white" face="Times New Roman" >OKÇULUK NASIL YAPILIR</font></a>
+                </td>
+
+            <td bgcolor="black" height="500" width="512" align="center"><img  height="500" src="2.jpg"><br/>
+            <a href="okculukekipmanlari.html"><font color="white" face="Times New Roman" >OKÇULUK MALZEMELERİ</font></a>
+            </td>
+            
+        </tr>
+
+        <tr>
+            <td bgcolor="black" align="center" height="500" width="512"><img width="512" height="508"  src="7.jpg" ><br/>
+            <a href="okculukseruvenim.html"><font color="white" face="Times New Roman">OKÇULUK SERÜVENİM</font></a>
+            </td>
+
+            <td bgcolor="black" align="center" width="512"><img width="512"  height="500" src="14.jpg" ><br/>
+            <a href="turnuvalar.html"><font color="white" face="Times New Roman">TURNUVALAR</font></a>
+            </td>
+        </tr>
+
+        <tr>
+            <td bgcolor="black" align="center" height="500" width="512"><img width="512" height="508" src="11.jpg" ><br/>
+            <a href="resimler.html"><font color="white" face="Times New Roman">GALERİ</font></a>
+            </td>
+
+            <td bgcolor="black" align="center" width="512"><img width="512" height="508" src="20.jpg"><br/>
+            <a href="antrenörüm.html"><font color="white" face="Times New Roman">ANTRENÖRÜM</font></a>
+            </td>
+        </tr>
+
+        <tr>
+            <td bgcolor="black" colspan="2" width="1024" height="254"><img width="1024" height="254"src="1.png"></td>
+            
+        </tr>
+
+
+    </table>
+
+    <p align="center">
+        <a href="https://www.instagram.com/_abdullahbilgi/"><font size="6" color="red">İnstagram  </font></a><font size="6" ><b>|</b></font>
+        <a href="https://www.linkedin.com/in/abdullah-bilgi-845949223/"><font size="6" color="red">  LinkedIn  </font></a><font size="6"><b>|</b></font>
+        <a href="https://github.com/abdullahbilgi"><font size="6" color="red">GitHub</font></a>
+    </p>
+    
+
+<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>
+</body>
+</html>*****************************************************************************************************************************<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>FENERBAHÇE TOP5</title>
+</head>
+<body>
+<table align="center" border="0">
+<tr>
+<td><img src="fotograflar/Fenerbhace.jpg" width="200"></td>
+</tr>
+<tr>
+<td align="center"><b><u><font size="4" color="#0000ff" face="Comic Sans MS">FENERBAHÇE TOP5</font></u></b></td>
+</tr>
+</table>
+<br/><br/><br/><br/>
+
+<table border="1" align="center" cellspacing="0" background="fotograflar/Arkakpk21.jpg">
+<tr>
+<td colspan="2" align="center" height="30" bgcolor="#e2d409"><font size="4" face="Comic Sans MS" color="#0000ff">BRANŞLAR</td>
+</tr>
+<tr>
+<td width="300" height="100"><a href="Erkek futbol.html">
+<font size="4" face="Tahoma" color="#e2d409">ERKEK FUTBOL</font></a>
+<ul type="square"><font color="#ffffff">
+<li>Mesut Özil</li>
+<li>İrfan Can Kahveci</li>
+<li>Kim Min Jae</li>
+<li>Enner Valencia</li>
+<li>Attila Szalai</li>
+</font></ul>
+</td>
+<td width="300"><a href="Kadın voleybol.html">
+<font size="4" face="Tahoma" color="#e2d409">KADIN VOLEYBOL</font></a>
+<ul type="square"><font color="#ffffff">
+<li>Naz Aydemir Akyol</li>
+<li>Arina Fedorovtseva</li>
+<li>Mina Popovic</li>
+<li>Meliha İsmailoğlu</li>
+<li>Eda Erdem Dündar</li>
+</font></ul>
+</td>
+</tr>
+
+<tr>
+<td width="300" height="100"><a href="Kadın Basketbol.html">
+<font size="4" face="Tahoma" color="#e2d409">KADIN BASKETBOL</font></a>
+<ul type="square"><font color="#ffffff">
+<li>Alina Iagupova</li>
+<li>Olcay Çakır Turguti</li>
+<li>Alperi Ona</li>
+<li>Elizabeth Olatayo Williams</li>
+<li>Tuğçe Canıtez</li>
+</font></ul>
+</td>
+<td width="300"><a href="Erkek Basketbol.html">
+<font size="4" face="Tahoma" color="#e2d409">ERKEK BASKETBOL</font></a>
+<ul type="square"><font color="#ffffff">
+<li>Jan Vesely</li>
+<li>Nando De Colo</li>
+<li>Marko Guduric</li>
+<li>Devin Booker</li>
+<li>Şehmus Hazer</li>
+</font></ul>
+</td>
+</tr>
+
+</table>
+
+<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>
+</body>
+</html>*****************************************************************************************************************************<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ana sayfa</title>
+    </head>
+    <body bgcolor="12202b">
+<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>
+</body>
+    <body>
+        
+        <table border="0" align="center" bgcolor="02e5d1">
+            <tr height="80">
+                <td width="200" align="center"><a href="index.html">Ana Sayfa</a></td>
+                <td width="300" align="center"><a href="neresi.html">Doğu Türkistan neresi</a></td>
+                <td width="300" align="center"><a href="fotograflar.html">Doğu Türkistan'ın fotoğrafları</a></td>
+                <td width="350" align="center"><a href="neoluyor.html">Doğu Türkistan'daki Soykırımlar</a></td>
+                <td width="200" align="center"><a href="iletsim.html">İletişim</a></td>
+                <td width="250" align="center"></td>
+            </tr>
+        </table><br/><br/><br/><br/><br/><br/><br/><br/>
+        <table align="center" border="0">
+            
+            <tr><td bgcolor="12202b" align="center" width="1430" height="50"><h1>
+                <font color="feffb6" size="7" face="vardana">
+                    DOĞU TÜRKİSTAN<br/>
+                </font>
+                </h1></td></tr>
+            
+            <tr><td bgcolor="12202b"  align="center" width="1430" height="80"><h1>
+                <font color="7fe2cb" size="5" face="vardana">
+                    Doğu Türkistan neresidir? Doğu Türkistanda neler oluyor?<br/>
+                    Doğu Türkistandaki Zulümler ve Doğu Türkistan'ın tarihi.
+                </font>
+            </h1></td></tr>
+            
+        </table><br/><br/><br/><br/><br/><br/><br/><br/>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td><img width="715" height="300" src="foto4/h22.jpeg"></td>
+                <td><img width="710" height="300" src="foto4/h23.png"></td>
+            </tr>
+        </table>
+        
+    </body>
+</html>*****************************************************************************************************************************

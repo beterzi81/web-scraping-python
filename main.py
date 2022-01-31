@@ -14,17 +14,13 @@ f.close()
 #Artık bütün linklerimizi barındıran bir listemiz var
 duzenliLinkler=[]#linklerimizi düzenleyip bu listeye koyacağız
 for i in linkler:
-    parseLink=urlparse(i)#her linksi parçaladık
-    if(parseLink.netloc=="filedn.eu"):#burada bir istisna var, filedn.eu şeklindeki bir link var ve tam link girilmedikçe doğru adrese gitmiyor onun için o istisnayı düzeltiyoruz
+    parseLink=urlparse(i)#her linki parçaladık
+    if(parseLink.netloc=="filedn.eu" or  parseLink.netloc=="codesque.github.io") :#burada bir istisna var, filedn.eu şeklindeki bir link var ve tam link girilmedikçe doğru adrese gitmiyor onun için o istisnayı düzeltiyoruz.ikinci istisna da github.io linklerinde, onu da düzelttik
         duzenliLinkler.append(i)
     else:
         di=parseLink.scheme+"://"+parseLink.netloc  #scheme ve netloc kısmını :// stringi ile birleştirdiğimizde elimizde tertemiz bir index linki oluyor
         duzenliLinkler.append(di)
 #listemizdeki bütün linkleri düzenli hale getirdik.
-
-
-
-
 '''
 #########################Klasörleri oluşturma##########################
 #cat links.txt | cut -d "." -f 1 | cut -d "/" -f 3
@@ -38,33 +34,40 @@ for i in isimArray:#her isim için aynı adda bir klasör oluşturuldu,1 kez yap
     subprocess.run(command, capture_output=True, shell=True)
 '''
 #########################Linklere gidip html içeriğini alma##########################
-'''
-r= urllib.request.urlopen("http://muzikdukkanim.eu5.org")
-test=r.read()
-a=test.decode("utf-8")
-saveFile = open('htmller.txt','w')
-saveFile.write(str(a))
-saveFile.close()
-
-cmd='grep a\ href deneme.html | grep -v index | cut -d \'"\' -f 2'
-process2=subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)#o an bakıp belleğe aldığımız htmldeki bütün yönlendirme linklerini bulduk
-temp=process2.communicate()[0]
-insideLinks=temp.decode()
-insideLinksArray=insideLinks.split('\n')#Bu iç linkleri bir arraye atadık
-insideLinksArray=list(dict.fromkeys(insideLinksArray))#tekrarlayan değerleri kaldırdık
-insideLinksArray= list(filter(None, insideLinksArray))#null yani boş string değerlerini de kaldırdık
-#print(insideLinksArray)#bunu yaptığımızda index sayfamızda index hariç bütün referans verilen linkleri buluyor ve index olanları çıkarıyor, ardından da html isimlerini alıyor. bu print de o htmlleri tutan listeyi yazıyor
-
-#Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
-os.chdir("/Siteler/muzikdukkanim")
-for i in insideLinksArray:
-    #os.chdir("/"+i)
-    req= urllib.request.urlopen("http://muzikdukkanim.eu5.org" + i)
-    test=req.read()
-    decoded=test.decode("utf-8")
-    txtKeeper=i+".txt"#her html için bir txt uzantılı ad tutuyoruz
-    saveFile = open(txtKeeper,'w')
-    saveFile.write(str(decoded))
+os.chdir("Indirilebilen-htmller")
+sayac=0
+for i in duzenliLinkler:
+    r= urllib.request.urlopen(i)
+    test=r.read()
+    a=test.decode("utf-8")#bu şekilde yazınca 8. linkte UnicodeDecodeError: 'utf-8' codec can't decode byte 0xdd in position 114: invalid continuation byte hatası alıyorum bu hatayı aşmak için aşağıdaki satırı yazınca da karakterler dönüşmüyor ve yazı okunmuyor
+    #a=test.decode('unicode_escape').encode('utf-8') # ayrıca bu kodla çalıştırınca da 32. sitede urllib.error.HTTPError: HTTP Error 403: Forbidden hatası alıyorum
+    #45-50 arası siteleri indirebiliyor muyum denemek için yazıldı simüle satırları onlar. normalde hepsini kendi klasörüne indireceğim
+    temp=str(sayac)+".html"
+    sayac+=1
+    saveFile = open(temp,"w")
+    saveFile.write(str(a))
+    saveFile.write("*"*125)
     saveFile.close()
-    os.chdir("..")
+'''
+    cmd='grep a\ href deneme.html | grep -v index | cut -d \'"\' -f 2'
+    process2=subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)#o an bakıp belleğe aldığımız htmldeki bütün yönlendirme linklerini bulduk
+    temp=process2.communicate()[0]
+    insideLinks=temp.decode()
+    insideLinksArray=insideLinks.split('\n')#Bu iç linkleri bir arraye atadık
+    insideLinksArray=list(dict.fromkeys(insideLinksArray))#tekrarlayan değerleri kaldırdık
+    insideLinksArray= list(filter(None, insideLinksArray))#null yani boş string değerlerini de kaldırdık
+    #print(insideLinksArray)#bunu yaptığımızda index sayfamızda index hariç bütün referans verilen linkleri buluyor ve index olanları çıkarıyor, ardından da html isimlerini alıyor. bu print de o htmlleri tutan listeyi yazıyor
+
+    #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
+    os.chdir("/Siteler")
+    for j in insideLinksArray:
+        os.chdir("/"+j)
+        req= urllib.request.urlopen(i + "/" + j)
+        test=req.read()
+        decoded=test.decode("utf-8")
+        txtKeeper=j+".html"#her html için bir ad tutuyoruz
+        saveFile = open(txtKeeper,'w')
+        saveFile.write(str(decoded))
+        saveFile.close()
+        os.chdir("..")
 '''
