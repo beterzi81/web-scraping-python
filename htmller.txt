@@ -1,55 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Müzik Dükkanı</title>
-    <!-- Font-Family -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <h1><a href="index.html">Müzik Dükkanım</a></h1>
-        <div>
-          <a href="index.html">Ana Sayfa</a>
-          <a href="products.html">Ürünler</a>
-          <a href="lessons.html">Eğitimler</a>
-          <a href="branches.html">Şubelerimiz</a>
-          <a href="about-us.html">Hakkımızda</a>
-        </div>
-      </nav>
-    </header>
-
-    <section>
-      <article>
-        <p>
-          Müzik dükkanımıza hoş geldiniz! Çeşitli müzik aletlerini sitemizde
-          bulabilirsiniz. Uygun fiyatlı ve kaliteli ürünler için
-          <a href="products.html">ürünlerimizi</a> inceleyebilirsiniz.
-        </p>
-        <img
-          src="https://i.pinimg.com/originals/c2/55/10/c2551000c9cc7634590ac1cb6319dfb0.gif"
-          alt=""
-        />
-        <div>
-          <h4>Müzik Aletlerimiz</h4>
-          <ul>
-            <li>Keman</li>
-            <li>Piyano</li>
-            <li>Çello</li>
-            <li>Saksafon</li>
-            <li>Davul</li>
-            <li>Gitar</li>
-          </ul>
-        </div>
-      </article>
-    </section>
-  </body>
-</html>
+<http.client.HTTPResponse object at 0x1037edfa0>
+<http.client.HTTPResponse object at 0x10386e8b0>
+<http.client.HTTPResponse object at 0x1037edca0>
+<http.client.HTTPResponse object at 0x10386ea00>
+<http.client.HTTPResponse object at 0x1037edb50>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386ea00>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386eaf0>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386ea00>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386eaf0>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386eaf0>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386e970>
+<http.client.HTTPResponse object at 0x10386e0d0>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386e970>
+<http.client.HTTPResponse object at 0x10386e0d0>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386e970>
+<http.client.HTTPResponse object at 0x10386e0d0>
+<http.client.HTTPResponse object at 0x10386e8b0>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386e8b0>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386e8b0>
+<http.client.HTTPResponse object at 0x10386eb20>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386e910>
+<http.client.HTTPResponse object at 0x10386e9a0>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386eaf0>
+<http.client.HTTPResponse object at 0x10386e9a0>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386e9a0>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386e9a0>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386e9a0>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386eaf0>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386eaf0>
+<http.client.HTTPResponse object at 0x10386ea30>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386eaf0>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386e970>
+<http.client.HTTPResponse object at 0x10386eb80>
+<http.client.HTTPResponse object at 0x10386e8b0>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386e0d0>
+<http.client.HTTPResponse object at 0x10386e910>
+<http.client.HTTPResponse object at 0x10386e8b0>
+<http.client.HTTPResponse object at 0x10386e910>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386e850>
+<http.client.HTTPResponse object at 0x10386e8b0>
+<http.client.HTTPResponse object at 0x10386e910>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386e910>
+<http.client.HTTPResponse object at 0x10386e970>
+<http.client.HTTPResponse object at 0x10386ea60>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386e910>
+<http.client.HTTPResponse object at 0x10386e970>
+<http.client.HTTPResponse object at 0x10386e910>
+<http.client.HTTPResponse object at 0x10386e070>
+<http.client.HTTPResponse object at 0x10386e910>
+<http.client.HTTPResponse object at 0x10386e970>
