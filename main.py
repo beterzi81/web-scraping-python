@@ -1,6 +1,7 @@
 from base64 import encode
 from distutils import errors
 import urllib.request
+from urllib.request import Request, urlopen
 import subprocess
 import os
 from urllib.parse import urlparse
@@ -40,16 +41,16 @@ for i in isimArray:#her isim için aynı adda bir klasör oluşturuldu,1 kez yap
 os.chdir("Indirilebilen-htmller")#deneme için şimdilik indirmeleri buraya yapıyoruz
 sayac=0#bu da tamamen şimdilik indirebilen htmlleri adlandırmak için koyulmuş bir sayaç
 for i in duzenliLinkler:
-    r= urllib.request.urlopen(i)
-    test=r.read()
-    a=test.decode("utf-8",errors='ignore')#bu şekilde yazınca 8. linkte UnicodeDecodeError: 'utf-8' codec can't decode byte 0xdd in position 114: invalid continuation byte hatası alıyorum(bu hatayı, decode fonksiyonunun içinde errors='ignore' parametresi vererek çözdüm)     
+    req = urllib.request.Request(i, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+    requestingHTML= urllib.request.urlopen(req).read()
+    decodedHTML=requestingHTML.decode("utf-8",errors='ignore')#bu şekilde yazınca 8. linkte UnicodeDecodeError: 'utf-8' codec can't decode byte 0xdd in position 114: invalid continuation byte hatası alıyorum(bu hatayı, decode fonksiyonunun içinde errors='ignore' parametresi vererek çözdüm)     
     # ayrıca bu kodla çalıştırınca da 32. sitede urllib.error.HTTPError: HTTP Error 403: Forbidden hatası alıyorum
     #45-50 arası siteleri indirebiliyor muyum denemek için yazıldı simüle satırları onlar. normalde hepsini kendi klasörüne indireceğim
     
     temp=str(sayac)+".html"
     sayac+=1
     saveFile = open(temp,"w")
-    saveFile.write(str(a))
+    saveFile.write(str(decodedHTML))
     saveFile.write("*"*125)
     saveFile.close()
 '''
