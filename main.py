@@ -1,8 +1,6 @@
-from base64 import encode
-from distutils import errors
+
 import urllib.request
 from bs4 import BeautifulSoup
-from urllib.request import Request, urlopen
 import subprocess
 import os
 from urllib.parse import urlparse
@@ -35,8 +33,10 @@ for i in linkler:
         di=parseLink.scheme+"://"+parseLink.netloc  #scheme ve netloc kısmını :// stringi ile birleştirdiğimizde elimizde tertemiz bir index linki oluyor
         duzenliLinkler.append(di)
 #listemizdeki bütün linkleri düzenli hale getirdik.
-'''
+
 #########################Klasörleri oluşturma##########################
+'''
+Yorum satırıyla yazılan kısım güncellemeden önceki bash komutu kullanılarak işi yapan kısımdır, artık aynı işi bir python kütüphanesiyle yazarak daha gelişmiş bir uyumluluk sağlıyoruz
 #cat links.txt | cut -d "." -f 1 | cut -d "/" -f 3
 cmd = "cat links.txt | cut -d '.' -f 1 | cut -d '/' -f 3"#links.txt dosyasındaki linklerin isimlendirmeye uygun kısımlarını kestik
 process = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
@@ -46,6 +46,14 @@ isimArray=isim.split('\n')#string türünden string array türüne dönüştür�
 for i in isimArray:#her isim için aynı adda bir klasör oluşturuldu,1 kez yapılmalı
     command = "cd /Users/beterzi/Desktop/Web-Scraping/Siteler; mkdir " + i
     subprocess.run(command, capture_output=True, shell=True)
+'''
+klasorIsimleri=[]
+for i in duzenliLinkler:
+    parseLink=urlparse(i)
+    klasorIsimleri.append(parseLink.netloc)
+for i in klasorIsimleri:
+    os.mkdir("Siteler/"+i)
+
 '''
 #########################Linklere gidip html içeriğini alma##########################
 os.chdir("Indirilebilen-htmller")#deneme için şimdilik indirmeleri buraya yapıyoruz
@@ -62,7 +70,7 @@ for i in duzenliLinkler:
     saveFile = open(temp,"w")
     saveFile.write(str(decodedHTML))
     saveFile.close()
-'''
+''''''
     cmd='grep a\ href deneme.html | grep -v index | cut -d \'"\' -f 2'
     process2=subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)#o an bakıp belleğe aldığımız htmldeki bütün yönlendirme linklerini bulduk
     temp=process2.communicate()[0]
