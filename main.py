@@ -14,6 +14,13 @@ def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bul
             line_count += 1
     file.close()
     return line_count
+
+def getHTML(link):
+    req = urllib.request.Request(link, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+    requestingHTML= urllib.request.urlopen(req).read()
+    decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
+    return decodedHTML
+
 def start():
     try:
         os.mkdir("Siteler")  
@@ -67,53 +74,36 @@ for i in klasorIsimleri:
 
 
 #########################Linklere gidip html içeriğini alma##########################
-#os.chdir("Indirilebilen-htmller")#deneme için şimdilik indirmeleri buraya yapıyoruz
-#sayac=0#bu da tamamen şimdilik indirebilen htmlleri adlandırmak için koyulmuş bir sayaç
 cwd=os.getcwd()
 klasorIsimleriIterator=0
 for i in duzenliLinkler:
-    req = urllib.request.Request(i, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
-    requestingHTML= urllib.request.urlopen(req).read()
-    decodedHTML=requestingHTML.decode("utf-8",errors='ignore')#bu şekilde yazınca 8. linkte UnicodeDecodeError: 'utf-8' codec can't decode byte 0xdd in position 114: invalid continuation byte hatası alıyorum(bu hatayı, decode fonksiyonunun içinde errors='ignore' parametresi vererek çözdüm)     
-    # ayrıca bu kodla çalıştırınca da 32. sitede urllib.error.HTTPError: HTTP Error 403: Forbidden hatası alıyorum,hatanın sebebi doğru link ayrıştırmasını yapamamammış onu da hallettim
-    
+    decodedHTML=getHTML(i)
     
     indx="index.html"
     os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
     saveFile = open(indx,"w")
     saveFile.write(str(decodedHTML))
     saveFile.close()
-    klasorIsimleriIterator+=1
     #yukardaki cwd değişkeni tanımlamasından bu yorum satırına kadar olan kısım artık bir simülasyon değil gerçek bir çalışma halinde. bütün linklerden gelen index.html içeriği ilgili klasöre index.html adı altında oluşturulup kaydediliyor.
 
-'''
-    cmd='grep a\ href deneme.html | grep -v index | cut -d \'"\' -f 2'
-    process2=subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)#o an bakıp belleğe aldığımız htmldeki bütün yönlendirme linklerini bulduk
-    temp=process2.communicate()[0]
-    insideLinks=temp.decode()
-    unfilteredInsideLinks=insideLinks.split('\n')
-    
-    FilteredInsideLinksArray=[]
-    
-    for i in unfilteredInsideLinks:
-        if re.search(r'[.]html$',i):
-            FilteredInsideLinksArray.append(i)
 
-    #Bu iç linklerin html uzantılı olanlarını bir arraye atadık çünkü arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
-    FilteredInsideLinksArray=list(dict.fromkeys(FilteredInsideLinksArray))#tekrarlayan değerleri kaldırdık
-    FilteredInsideLinksArray= list(filter(None, FilteredInsideLinksArray))#null yani boş string değerlerini de kaldırdık
-    #print(FilteredInsideLinksArray)#bunu yaptığımızda index sayfamızda index hariç bütün referans verilen linkleri buluyor ve index olanları çıkarıyor, ardından da html isimlerini alıyor. bu print de o htmlleri tutan listeyi yazıyor
+    #döngümüze devam ederken alıp kaydettiğimiz index.html dosyasıyla işimiz daha bitmedi. burada bu içeriği bs'ye veriyoruz ki parse işlemini yapabilsin
+    soup = BeautifulSoup(decodedHTML, 'html.parser')
+    insideLinks=[]
+    for link in soup.find_all('a'):
+        insideLinks.append(link.get('href'))
+
+    insideLinks=list(dict.fromkeys(insideLinks))#tekrarlayan değerleri kaldırdık
+    insideLinks=list(filter(None, insideLinks))#null yani boş string değerlerini de kaldırdık
+    regulatedInsideLinks=[]
+    '''
+    for j in insideLinks:
+        if re.search(r'html$',j) and not (re.search(r'^[index.html]',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
+            regulatedInsideLinks.append(j)
 
     #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
-    os.chdir("/Siteler")
-    for j in FilteredInsideLinksArray:
-        os.chdir("/"+j)
-        req= urllib.request.urlopen(i + "/" + j)
-        test=req.read()
-        decoded=test.decode("utf-8")
-        txtKeeper=j+".html"#her html için bir ad tutuyoruz
-        saveFile = open(txtKeeper,'w')
-        saveFile.write(str(decoded))
-        saveFile.close()
-        os.chdir("..")
+    for k in regulatedInsideLinks:
+        
+    
+    klasorIsimleriIterator+=1
 '''

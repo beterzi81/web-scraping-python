@@ -1,28 +1,14 @@
 from base64 import encode
 from distutils import errors
 from lib2to3.pgen2 import parse
-import urllib.request
+from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 import subprocess
 import os
 from urllib.parse import urlparse
 import re
 
-
-a=[1,2,3,4,5]
-b=[6,7,8,9,0]
-
-
-for i,j in a,b:
-    print("a="+i+"     b=" +j)
-
-'''
-cmd = "cat links.txt | cut -d '.' -f 1 | cut -d '/' -f 3"#links.txt dosyasındaki linklerin isimlendirmeye uygun kısımlarını kestik
-process = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-temp = process.communicate()[0]
-isim=temp.decode()#bytes türünde dönen isimlendirmede kullanılacak kısımlar stringe dönüştürüldü
-isimArray=isim.split('\n')#string türünden string array türüne dönüştürüldü
-for i in isimArray:#her isim için aynı adda bir klasör oluşturuldu,1 kez yapılmalı
-    command = "cd /Users/beterzi/Desktop/Web-Scraping/Siteler; mkdir " + i
-    subprocess.run(command, capture_output=True, shell=True)
-    '''
+a="https://codesque.github.io/BMGproje/"
+b="https://docs.python.org/3/library/urllib.parse.html"
+parse=urlparse(b)
+print(parse.path)
