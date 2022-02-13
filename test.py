@@ -9,10 +9,12 @@ from urllib.parse import urlparse
 import re
 
 
+a=[1,2,3,4,5]
+b=[6,7,8,9,0]
 
-os.mkdir("Siteler/sdfg")
 
-
+for i,j in a,b:
+    print("a="+i+"     b=" +j)
 
 '''
 cmd = "cat links.txt | cut -d '.' -f 1 | cut -d '/' -f 3"#links.txt dosyasındaki linklerin isimlendirmeye uygun kısımlarını kestik

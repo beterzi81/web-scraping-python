@@ -1,4 +1,3 @@
-
 import urllib.request
 from bs4 import BeautifulSoup
 import subprocess
@@ -7,7 +6,7 @@ from urllib.parse import urlparse
 import re
 
 #########################Gerekli fonksiyonların tanımlanması##########################
-def lineCounter(filename):
+def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bulan fonksiyon 
     file = open(filename, "r")
     line_count = 0
     for line in file:
@@ -15,8 +14,15 @@ def lineCounter(filename):
             line_count += 1
     file.close()
     return line_count
+def start():
+    try:
+        os.mkdir("Siteler")  
+        print("Gerekli klasörler oluşturuldu!")
+    except FileExistsError:
+        print("Gerekli klasörler zaten mevcut, işleme devam ediliyor.")
 #########################Linkleri listeye aktarma##########################
 #önce linkleri tek tip haline getirmemiz laızm
+start()
 linkler=[]
 f=open('links.txt','r')#linklerin olduğu txt dosyasını açtık
 linkSatirSayisi=lineCounter("links.txt")
@@ -37,6 +43,7 @@ for i in linkler:
 #########################Klasörleri oluşturma##########################
 '''
 Yorum satırıyla yazılan kısım güncellemeden önceki bash komutu kullanılarak işi yapan kısımdır, artık aynı işi bir python kütüphanesiyle yazarak daha gelişmiş bir uyumluluk sağlıyoruz
+
 #cat links.txt | cut -d "." -f 1 | cut -d "/" -f 3
 cmd = "cat links.txt | cut -d '.' -f 1 | cut -d '/' -f 3"#links.txt dosyasındaki linklerin isimlendirmeye uygun kısımlarını kestik
 process = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
@@ -52,25 +59,34 @@ for i in duzenliLinkler:
     parseLink=urlparse(i)
     klasorIsimleri.append(parseLink.netloc)
 for i in klasorIsimleri:
-    os.mkdir("Siteler/"+i)
+    try:
+        os.mkdir("Siteler/"+i)  
+        print(i+" adlı klasör oluşturuldu! ")
+    except FileExistsError:
+        print(i+ " adlı klasör zaten mevcut!")
 
-'''
+
 #########################Linklere gidip html içeriğini alma##########################
-os.chdir("Indirilebilen-htmller")#deneme için şimdilik indirmeleri buraya yapıyoruz
-sayac=0#bu da tamamen şimdilik indirebilen htmlleri adlandırmak için koyulmuş bir sayaç
+#os.chdir("Indirilebilen-htmller")#deneme için şimdilik indirmeleri buraya yapıyoruz
+#sayac=0#bu da tamamen şimdilik indirebilen htmlleri adlandırmak için koyulmuş bir sayaç
+cwd=os.getcwd()
+klasorIsimleriIterator=0
 for i in duzenliLinkler:
     req = urllib.request.Request(i, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
     requestingHTML= urllib.request.urlopen(req).read()
     decodedHTML=requestingHTML.decode("utf-8",errors='ignore')#bu şekilde yazınca 8. linkte UnicodeDecodeError: 'utf-8' codec can't decode byte 0xdd in position 114: invalid continuation byte hatası alıyorum(bu hatayı, decode fonksiyonunun içinde errors='ignore' parametresi vererek çözdüm)     
-    # ayrıca bu kodla çalıştırınca da 32. sitede urllib.error.HTTPError: HTTP Error 403: Forbidden hatası alıyorum
-    #aşağıdaki satırlar siteleri indirebiliyor muyum denemek için yazıldı simüle satırları onlar. normalde hepsini kendi klasörüne indireceğim
+    # ayrıca bu kodla çalıştırınca da 32. sitede urllib.error.HTTPError: HTTP Error 403: Forbidden hatası alıyorum,hatanın sebebi doğru link ayrıştırmasını yapamamammış onu da hallettim
     
-    temp=str(sayac)+".html"
-    sayac+=1
-    saveFile = open(temp,"w")
+    
+    indx="index.html"
+    os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
+    saveFile = open(indx,"w")
     saveFile.write(str(decodedHTML))
     saveFile.close()
-''''''
+    klasorIsimleriIterator+=1
+    #yukardaki cwd değişkeni tanımlamasından bu yorum satırına kadar olan kısım artık bir simülasyon değil gerçek bir çalışma halinde. bütün linklerden gelen index.html içeriği ilgili klasöre index.html adı altında oluşturulup kaydediliyor.
+
+'''
     cmd='grep a\ href deneme.html | grep -v index | cut -d \'"\' -f 2'
     process2=subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)#o an bakıp belleğe aldığımız htmldeki bütün yönlendirme linklerini bulduk
     temp=process2.communicate()[0]
