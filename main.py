@@ -1,9 +1,12 @@
+from pydoc import getpager
 import urllib.request
 from bs4 import BeautifulSoup
 import subprocess
 import os
 from urllib.parse import urlparse
 import re
+
+from cv2 import normalize
 
 #########################Gerekli fonksiyonların tanımlanması##########################
 def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bulan fonksiyon 
@@ -96,14 +99,23 @@ for i in duzenliLinkler:
     insideLinks=list(dict.fromkeys(insideLinks))#tekrarlayan değerleri kaldırdık
     insideLinks=list(filter(None, insideLinks))#null yani boş string değerlerini de kaldırdık
     regulatedInsideLinks=[]
-    '''
+    klasorIsimleriIterator+=1
+    
     for j in insideLinks:
         if re.search(r'html$',j) and not (re.search(r'^[index.html]',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
             regulatedInsideLinks.append(j)
+    normalizedPath=''
+    getPath=urlparse(i)
+    if not re.search(r'^/',str(getPath.path)):
+        normalizedPath+='/'+str(getPath.path)
+        if not re.search(r'/$',str(getPath.path)):
+            normalizedPath+=str(getPath.path)+'/'
+        
+
+        print(normalizedPath)
+    else:
+        print('sa')
 
     #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
     for k in regulatedInsideLinks:
-        
-    
-    klasorIsimleriIterator+=1
-'''
+        branchHTML=getHTML(i)

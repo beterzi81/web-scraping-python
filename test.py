@@ -7,8 +7,10 @@ import subprocess
 import os
 from urllib.parse import urlparse
 import re
-
-a="https://codesque.github.io/BMGproje/"
+from pathlib import PurePosixPath
+a="https://codesque.github.io"
 b="https://docs.python.org/3/library/urllib.parse.html"
-parse=urlparse(b)
-print(parse.path)
+
+url = 'http://www.example.com/hithere/something/else'
+
+PurePosixPath(unquote(urlparse(url).path)).parts[1]
