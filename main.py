@@ -5,8 +5,7 @@ import subprocess
 import os
 from urllib.parse import urlparse
 import re
-
-from cv2 import normalize
+import os.path
 
 #########################Gerekli fonksiyonların tanımlanması##########################
 def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bulan fonksiyon 
@@ -17,6 +16,9 @@ def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bul
             line_count += 1
     file.close()
     return line_count
+
+def getBeforePath(parsedURL):
+    return parsedURL.scheme+ '://'+ parsedURL.netloc
 
 def getHTML(link):
     req = urllib.request.Request(link, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
@@ -43,11 +45,25 @@ f.close()
 duzenliLinkler=[]#linklerimizi düzenleyip bu listeye koyacağız
 for i in linkler:
     parseLink=urlparse(i)#her linki parçaladık
-    if(re.search(r'filedn.eu',i) or re.search(r'codesque.github.io',i) or re.search(r'orgfree.com',i)) :#burada bir istisna var, filedn.eu şeklindeki bir link var ve tam link girilmedikçe doğru adrese gitmiyor onun için o istisnayı düzeltiyoruz.ikinci istisna da github.io linklerinde, onu da düzelttik. son olarak orgfree linklerinde de bazı sorunlar çıkıyordu onları da bütün şekilde almak zorunda kaldığımız için onu da ekledik
-        duzenliLinkler.append(i)
-    else:
-        di=parseLink.scheme+"://"+parseLink.netloc  #scheme ve netloc kısmını :// stringi ile birleştirdiğimizde elimizde tertemiz bir index linki oluyor
-        duzenliLinkler.append(di)
+    normalizedPath=''
+
+    if not re.search(r'^/',str(parseLink.path)):
+        normalizedPath+='/'+str(parseLink.path)
+        i= getBeforePath(parseLink)+ normalizedPath
+    
+    duzenliLinkler.append(i)
+ctr=0
+for i in duzenliLinkler:
+    i=i.rstrip('\n')
+    duzenliLinkler[ctr]=i
+    ctr+=1
+'''
+#linkleri txt ile görmek istersek
+f=open("duzenli.txt",'w')
+for i in duzenliLinkler:
+    f.write(i+'\n')
+f.close()
+'''
 #listemizdeki bütün linkleri düzenli hale getirdik.
 
 #########################Klasörleri oluşturma##########################
@@ -119,3 +135,4 @@ for i in duzenliLinkler:
     #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
     for k in regulatedInsideLinks:
         branchHTML=getHTML(i)
+        
