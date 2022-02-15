@@ -6,6 +6,7 @@ import os
 from urllib.parse import urlparse
 import re
 import os.path
+import ssl
 
 #########################Gerekli fonksiyonların tanımlanması##########################
 def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bulan fonksiyon 
@@ -22,7 +23,12 @@ def getBeforePath(parsedURL):
 
 def getHTML(link):
     req = urllib.request.Request(link, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
-    requestingHTML= urllib.request.urlopen(req).read()
+    gcontext = ssl.SSLContext()
+    try:
+        requestingHTML= urllib.request.urlopen(req,context=gcontext).read()
+    except TimeoutError:
+        print("Böyle bir bağlantı yok!")
+        return "Böyle bir şey yok!"
     decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
     return decodedHTML
 
@@ -33,7 +39,7 @@ def start():
     except FileExistsError:
         print("Gerekli klasörler zaten mevcut, işleme devam ediliyor.")
 #########################Linkleri listeye aktarma##########################
-#önce linkleri tek tip haline getirmemiz laızm
+#önce linkleri tek tip haline getirmemiz lazım
 start()
 linkler=[]
 f=open('links.txt','r')#linklerin olduğu txt dosyasını açtık
@@ -114,25 +120,33 @@ for i in duzenliLinkler:
 
     insideLinks=list(dict.fromkeys(insideLinks))#tekrarlayan değerleri kaldırdık
     insideLinks=list(filter(None, insideLinks))#null yani boş string değerlerini de kaldırdık
-    regulatedInsideLinks=[]
-    klasorIsimleriIterator+=1
+    regulatedInsideLinks=[]#her döngüde üstüne eklenerek gitmesin diye burada listemizi boşaltıyoruz
+    encodedInsideLinks=[]
     
     for j in insideLinks:
         if re.search(r'html$',j) and not (re.search(r'^[index.html]',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
             regulatedInsideLinks.append(j)
-    normalizedPath=''
-    getPath=urlparse(i)
-    if not re.search(r'^/',str(getPath.path)):
-        normalizedPath+='/'+str(getPath.path)
-        if not re.search(r'/$',str(getPath.path)):
-            normalizedPath+=str(getPath.path)+'/'
-        
-
-        print(normalizedPath)
-    else:
-        print('sa')
-
-    #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
     for k in regulatedInsideLinks:
-        branchHTML=getHTML(i)
+        encodedInsideLinks.append(urllib.parse.quote(k))
+    
+    getPath=urlparse(i)#düzenli hale getirdiğimiz linkimizi parçalıyoruz
+    pth=getPath.path#path kısmını alıyoruz
+    lgt=len(os.path.split(pth)[1])#path kısmının en son kısmını alıyor bu fonksiyon
+    orgI=i[:len(i) - lgt]#organized i değişkenimiz düzenli linkimizin son path kısmı çıkarılmış hali oluyor
+    isimlendirmeSayaci=0
+    for l in encodedInsideLinks:#sonra her iç düzenli link için elimizdeki düzenli linki manipüle edip o adrese gidip html dosyasını indirip kaydediyoruz
+        
+        fileName=regulatedInsideLinks[isimlendirmeSayaci]#baştaki uzantıyı alıyoruz ki onun adıyla bir html oluşturacağız
+        isimlendirmeSayaci+=1#artırıyoruz ikinci link adına geçsin diye
+        l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
+        print(l+ " linki indirilmeye başlandı...")
+        sideHTML=getHTML(l)
+        os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
+        saveFile = open(fileName,"w")
+        saveFile.write(str(sideHTML))
+        saveFile.close()
+        print(l+" indirmesi tamamlandı!")
+    klasorIsimleriIterator+=1
+    #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
+
         

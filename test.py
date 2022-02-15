@@ -8,40 +8,18 @@ import os
 from urllib.parse import urlparse
 import re
 from pathlib import PurePosixPath
+import urllib.request
 
-def getBeforePath(parsedURL):
-    return parsedURL.scheme+ '://'+ parsedURL.netloc
+
 '''
 getPath=urlparse(e)
 pth=parse.path
 normalizedPath=''
 print(os.path.split(pth)[1])
 '''
-a="https://codesque.github.io"
-a1="hat.html"
-a2="kat.html"
-a3="sat.html"
-b="https://docs.python.org/3/library/sfwef/wdsgh/shdhy/fg/sdf/urllib.parse.html"
-c="https://codesque.github.io/BMGproje/"
-d="http://metehansozenli.orgfree.com/index.html"
-e="http://abdulkadiryildirim1745.eu5.org/"
-list=[a,b,c,d,e]
-alist=[a1,a2,a3]
-normalizedLinks=[]
-parse=urlparse(d)
-pth=parse.path
-normalizedPath=''
-print(os.path.split(pth)[1])
+a="http://abdullahbilgi.orgfree.com/okculukekipmanlari.html"
 
-
-for i in list:
-    getParse=urlparse(i)
-    pth=getParse.path
-    normalizedPath=''
-    if not re.search(r'^/',str(getParse.path)):
-        normalizedPath+='/'+str(getParse.path)
-        i= getBeforePath(getParse)+ normalizedPath
-    normalizedLinks.append(i)
-print(normalizedLinks)
-
-
+req = urllib.request.Request(a, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+requestingHTML= urllib.request.urlopen(req).read()
+decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
+print(decodedHTML)
