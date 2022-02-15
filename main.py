@@ -1,7 +1,6 @@
-from pydoc import getpager
+from ast import expr_context
 import urllib.request
 from bs4 import BeautifulSoup
-import subprocess
 import os
 from urllib.parse import urlparse
 import re
@@ -32,6 +31,8 @@ def getHTML(link):
     except urllib.error.URLError:
         print("Böyle bir bağlantı yok!")
         return "Böyle bir şey yok!"
+    except ConnectionResetError:
+        getHTML(link)
     decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
     return decodedHTML
 
@@ -103,6 +104,7 @@ for i in klasorIsimleri:
 
 #########################Linklere gidip html içeriğini alma##########################
 cwd=os.getcwd()
+print(cwd)
 klasorIsimleriIterator=0
 for i in duzenliLinkler:
     decodedHTML=getHTML(i)
@@ -123,7 +125,6 @@ for i in duzenliLinkler:
 
     insideLinks=list(dict.fromkeys(insideLinks))#tekrarlayan değerleri kaldırdık
     insideLinks=list(filter(None, insideLinks))#null yani boş string değerlerini de kaldırdık
-    print(insideLinks)
     regulatedInsideLinks=[]#her döngüde üstüne eklenerek gitmesin diye burada listemizi boşaltıyoruz
     encodedInsideLinks=[]
     
@@ -137,15 +138,38 @@ for i in duzenliLinkler:
     pth=getPath.path#path kısmını alıyoruz
     lgt=len(os.path.split(pth)[1])#path kısmının en son kısmını alıyor bu fonksiyon
     orgI=i[:len(i) - lgt]#organized i değişkenimiz düzenli linkimizin son path kısmı çıkarılmış hali oluyor
+    print(orgI)
     isimlendirmeSayaci=0
     for l in encodedInsideLinks:#sonra her iç düzenli link için elimizdeki düzenli linki manipüle edip o adrese gidip html dosyasını indirip kaydediyoruz
         
+        os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
         fileName=regulatedInsideLinks[isimlendirmeSayaci]#baştaki uzantıyı alıyoruz ki onun adıyla bir html oluşturacağız
+        cwdInside=cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator]
+        lastPath=os.path.split(fileName)[1]
+        print(fileName)
+        if '/' in fileName:
+            directoryNames=fileName.split('/')
+            print(directoryNames)
+            for i in directoryNames:
+                if i != lastPath:
+                    os.chdir(cwdInside)
+                    print(cwdInside)
+                    try:
+                        os.mkdir(i)
+                    except FileExistsError:
+                        cwdInside=cwdInside+"/"+i
+                        continue
+                    print(i + " oluşturuldu")
+                    cwdInside=cwdInside+"/"+i
+                else:
+                    os.chdir(cwdInside)
+                    fileName=lastPath
+            
         isimlendirmeSayaci+=1#artırıyoruz ikinci link adına geçsin diye
         l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
         print(l+ " linki indirilmeye başlandı...")
         sideHTML=getHTML(l)
-        os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
+        
         saveFile = open(fileName,"w")
         saveFile.write(str(sideHTML))
         saveFile.close()

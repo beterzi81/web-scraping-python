@@ -23,7 +23,7 @@ saveFile.write(str())
 saveFile.close()
 '''
 a="iotherpages-favpages-aciktekerlek-f1.html"
-
-saveFile = open(a,"w")
-saveFile.write(str(a))
-saveFile.close()
+cwd=os.getcwd()
+os.mkdir("A")
+os.chdir(cwd+"/"+"A")
+os.mkdir("b")

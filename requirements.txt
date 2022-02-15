@@ -1,3 +1,4 @@
 Bu projeyi çalıştırmak için aşağıdaki kütüphaneleri indirip kurmanız gerekiyor:
 urllib
 subprocess
+bs4
