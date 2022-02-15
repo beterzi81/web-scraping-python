@@ -22,11 +22,14 @@ def getBeforePath(parsedURL):
     return parsedURL.scheme+ '://'+ parsedURL.netloc
 
 def getHTML(link):
-    req = urllib.request.Request(link, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
-    gcontext = ssl.SSLContext()
-    try:
+    try: 
+        gcontext = ssl.SSLContext()
+        req = urllib.request.Request(link, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
         requestingHTML= urllib.request.urlopen(req,context=gcontext).read()
     except TimeoutError:
+        print("Böyle bir bağlantı yok!")
+        return "Böyle bir şey yok!"
+    except urllib.error.URLError:
         print("Böyle bir bağlantı yok!")
         return "Böyle bir şey yok!"
     decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
@@ -120,11 +123,12 @@ for i in duzenliLinkler:
 
     insideLinks=list(dict.fromkeys(insideLinks))#tekrarlayan değerleri kaldırdık
     insideLinks=list(filter(None, insideLinks))#null yani boş string değerlerini de kaldırdık
+    print(insideLinks)
     regulatedInsideLinks=[]#her döngüde üstüne eklenerek gitmesin diye burada listemizi boşaltıyoruz
     encodedInsideLinks=[]
     
     for j in insideLinks:
-        if re.search(r'html$',j) and not (re.search(r'^[index.html]',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
+        if re.search(r'html$',j) and not (re.search(r'^index.html',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
             regulatedInsideLinks.append(j)
     for k in regulatedInsideLinks:
         encodedInsideLinks.append(urllib.parse.quote(k))
@@ -145,7 +149,7 @@ for i in duzenliLinkler:
         saveFile = open(fileName,"w")
         saveFile.write(str(sideHTML))
         saveFile.close()
-        print(l+" indirmesi tamamlandı!")
+        print("İndirme tamamlandı!")
     klasorIsimleriIterator+=1
     #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
 

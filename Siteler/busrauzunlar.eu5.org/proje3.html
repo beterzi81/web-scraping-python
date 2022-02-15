@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<title>Proje 3</title>
+		<meta name="keywords" content="yazılım, bilişim teknolojileri, bilgisayar programcılığı, bilgisayar mühendisliği, CNC Router, Arduino" charset="UTF-8"/>
+	</head>
+	<body>
+		<div border="1" align="center" width="1500">
+			<div>
+				<img src="software.jpg" height="350" width="1600"/>
+			</div><br/>
+			<div align="center">
+				<a href="index.html">Hakkımda</a>&nbsp;&nbsp;&nbsp;
+				<a href="proje1.html">Proje 1</a>&nbsp;&nbsp;&nbsp;
+				<a href="proje2.html">Proje 2</a>&nbsp;&nbsp;&nbsp;
+				<a href="proje3.html">Proje 3</a>&nbsp;&nbsp;&nbsp;
+				<a href="iletisim.html">İletişim</a>
+			</div>
+			<div>
+			<h1><font color ="#00328a">Sistem Analizi ve Tasarımı Dönem Projesi</font></h1>
+				<p>
+					<img src="cnc.jfif" alt="Cnc Router" width="400" height="300" hspace="20" align="right" />
+					<font face="Verdana" size="4" color="#00c8ff" >&nbsp;&nbsp;&nbsp;
+					CNC Router, bilgisayar programında yapılan herhangi vektörel bir çizimi CNC makinasının anlayacağı G kodlarına  çevirerek
+					makinanın çalışmasını sağlayan sistemdir. Yani işleme tezgahının bilgisayar yardımıyla hassas bir şekilde kontrol edilebildiği
+					tam otomatik makinelerdir. Sistem Analizi dersinde bu projeyi 2 takım arkadaşımla beraber yaptık. Ayrıca arduino ile ilgili 
+					bilgi sahibi olmak bizler için bir avantajdı.</font>
+				</p>
+				<p>
+					<font face="Verdana" size="4" color="#00c8ff" >&nbsp;&nbsp;&nbsp;
+					CNC Router yapım aşaması kısmında öncelikle literatür taraması yapılmış, gerekli malzemeler belirlenmiştir. Daha sonra 
+					malzemeler tedarik edilip uygulama aşamalarına geçildi. Bu proje yaklaşık 1000 TL bütçeyle yapıldı. Şase 3D yazıcı şaşesi olarak
+					hazır ve demonte olarak temin edilmesine rağmen 1 ay gibi bir süre sonra elle tutulur bir proje ortaya çıkmaya başladı.</font>
+				</p>
+				<p>
+					<font face="Verdana" size="4" color="#00c8ff" >&nbsp;&nbsp;&nbsp;
+					Akabinde SolidWorks adında CAM programı kullanılacak bilgisayara yüklendi. CAM (Computer Aided Manufacturing)  programları karışık
+					biçimli parçaların CNC kodlarını CNC tezgahlarında işlenmesini sağlar. SolidWorks bu açıdan oldukça işlevli ve yaygın kullanılan 
+					bir programdır. 5. Haftaya gelindiğinde (1 dönemi kapsayan bir projeydi) ilk parça denemeleri yapılmaya başlanmıştı.</font>
+				</p>
+				<img src="fritzingsema.png" alt="fritzing devre şeması" width="400" height="550" vspace="20" align="center" />
+				<img src="cncShield.jpg" alt="Cnc Shield" width="300" height="200" vspace="20" align="center" />
+				<img src="gravur.png" alt="Cnc Gravur" width="500" height="250" vspace="20" align="center" />
+				<p>
+					<font face="Verdana" size="4" color="#00c8ff" >&nbsp;&nbsp;&nbsp;
+					Son malzemeler olarak limit switch’ler ile güç kaynağı için malzeme alımları yapılmıştır. X, Y ve Z eksenleri için sınır noktası 
+					olarak adlandırabileceğimiz konumlara konulan bu aygıtlar, kontaklarının pozisyon değiştirmesiyle elektrik devresi açılır, kapatılır.
+					Benim adıma daha keyifli bir kısım olan Arduino bölümüne gelindiğinde, arduino ide kurulumu yapıldı ve Grbl Controller adlı programı
+					Arduino kartına yükleyebilmek için gerekli kütüphane yüklenir. 4 adet servo motor ile 3 eksenin hareketi sağlandı. Bir tanesi X 
+					eksenine klonlandı. CNC Shield adlı kart ise Arduino’ya eklendi. Cnc Router için gerekli malzemelerden biri olan Proxxon Gravür Cihazı
+					GG 12 temin edildi ve sisteme eklenerek mekanik olarak hazır hale getirildi.</font>
+				</p>
+				<img src="grbl.png" alt="Grbl Controller" width="600" height="300" vspace="20" align="center" />
+				<img src="arduinoide.png" alt="Arduino Kütüphane Ekleme" width="320" height="300" vspace="20" align="center" />
+				<img src="arduinoide1.png" alt="Arduino Kütüphane Ekleme" width="340" height="300" vspace="20" align="center" />
+				<p>
+					<font face="Verdana" size="4" color="#00c8ff" >&nbsp;&nbsp;&nbsp;
+					Ardından Grbl Controller adlı programla testler yapıldı. Solidworks programı aracılığıyla oluşturulan parçalar dosya olarak programa 
+					yüklendi ve strafor köpük malzemeler ile testler yapıldı.</font>
+				</p>
+				<p>
+					<font face="Verdana" size="4" color="#00c8ff" >&nbsp;&nbsp;&nbsp;
+					Son söz olarak, sistemin artı ve eksi kısımlarını değerlendirecek olursam; eksi yanı, 3D Printer şasesi kullanılıyor olmasıydı. Sistem,
+					iskelet sisteminden kaynaklı yeterli gücü sağlamakta zorlanıyordu. Artı yanı ise taşıması diğer cnc tezgahlarına nazaran oldukça rahattı.
+					</font>
+				</p>
+			</div>
+			<br/>
+				<a href="index.html">AnaSayfa'ya Dön </a>
+				<div width="500" height="200"><p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color ="#ff4a5c">Copyright © 2022 Büşra Uzunlar | Tüm Hakları Saklıdır.</font></p></div>
+		</div>
+	
+<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>
+</body>
+</html>
