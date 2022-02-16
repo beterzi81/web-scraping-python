@@ -20,6 +20,24 @@ def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bul
 def getBeforePath(parsedURL):
     return parsedURL.scheme+ '://'+ parsedURL.netloc
 
+def regulatedAndEncoded(HTMLSource):
+    soup = BeautifulSoup(HTMLSource, 'html.parser')
+    insideLinks=[]
+    for link in soup.find_all('a'):
+        insideLinks.append(link.get('href'))
+    
+    insideLinks=list(dict.fromkeys(insideLinks))#tekrarlayan değerleri kaldırdık
+    insideLinks=list(filter(None, insideLinks))#null yani boş string değerlerini de kaldırdık
+    regulatedInsideLinks=[]#her döngüde üstüne eklenerek gitmesin diye burada listemizi boşaltıyoruz
+    encodedInsideLinks=[]
+    
+    for j in insideLinks:
+        if re.search(r'html$',j) and not (re.search(r'^index.html',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
+            regulatedInsideLinks.append(j)
+    for k in regulatedInsideLinks:
+        encodedInsideLinks.append(urllib.parse.quote(k))
+    return regulatedInsideLinks,encodedInsideLinks
+
 def getHTML(link):
     try: 
         gcontext = ssl.SSLContext()
@@ -46,8 +64,8 @@ def start():
 #önce linkleri tek tip haline getirmemiz lazım
 start()
 linkler=[]
-f=open('links.txt','r')#linklerin olduğu txt dosyasını açtık
-linkSatirSayisi=lineCounter("links.txt")
+f=open('tst.txt','r')#linklerin olduğu txt dosyasını açtık
+linkSatirSayisi=lineCounter("tst.txt")
 for i in range(0,linkSatirSayisi):
     linkler.append(f.readline())#Her linki bir indexe attık
 f.close()
@@ -117,22 +135,8 @@ for i in duzenliLinkler:
     #yukardaki cwd değişkeni tanımlamasından bu yorum satırına kadar olan kısım artık bir simülasyon değil gerçek bir çalışma halinde. bütün linklerden gelen index.html içeriği ilgili klasöre index.html adı altında oluşturulup kaydediliyor.
 
 
-    #döngümüze devam ederken alıp kaydettiğimiz index.html dosyasıyla işimiz daha bitmedi. burada bu içeriği bs'ye veriyoruz ki parse işlemini yapabilsin
-    soup = BeautifulSoup(decodedHTML, 'html.parser')
-    insideLinks=[]
-    for link in soup.find_all('a'):
-        insideLinks.append(link.get('href'))
-
-    insideLinks=list(dict.fromkeys(insideLinks))#tekrarlayan değerleri kaldırdık
-    insideLinks=list(filter(None, insideLinks))#null yani boş string değerlerini de kaldırdık
-    regulatedInsideLinks=[]#her döngüde üstüne eklenerek gitmesin diye burada listemizi boşaltıyoruz
-    encodedInsideLinks=[]
-    
-    for j in insideLinks:
-        if re.search(r'html$',j) and not (re.search(r'^index.html',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
-            regulatedInsideLinks.append(j)
-    for k in regulatedInsideLinks:
-        encodedInsideLinks.append(urllib.parse.quote(k))
+    #döngümüze devam ederken alıp kaydettiğimiz index.html dosyasıyla işimiz daha bitmedi. burada bu içeriği fonksiyonumuza verip içinden isimlendirmede kullanacağımız regulatedInsideLinks ve path oluşturmada kullanacağımız encodedInsideLinks listesini elde ediyoruz
+    regulatedInsideLinks,encodedInsideLinks=regulatedAndEncoded(decodedHTML)
     
     getPath=urlparse(i)#düzenli hale getirdiğimiz linkimizi parçalıyoruz
     pth=getPath.path#path kısmını alıyoruz
@@ -141,12 +145,11 @@ for i in duzenliLinkler:
     print(orgI)
     isimlendirmeSayaci=0
     for l in encodedInsideLinks:#sonra her iç düzenli link için elimizdeki düzenli linki manipüle edip o adrese gidip html dosyasını indirip kaydediyoruz
-        
+        print(encodedInsideLinks)
         os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
         fileName=regulatedInsideLinks[isimlendirmeSayaci]#baştaki uzantıyı alıyoruz ki onun adıyla bir html oluşturacağız
         cwdInside=cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator]
         lastPath=os.path.split(fileName)[1]
-        print(fileName)
         if '/' in fileName:
             directoryNames=fileName.split('/')
             print(directoryNames)
@@ -169,7 +172,8 @@ for i in duzenliLinkler:
         l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
         print(l+ " linki indirilmeye başlandı...")
         sideHTML=getHTML(l)
-        
+        insideReg,insideEnc=regulatedAndEncoded(sideHTML)
+        print(insideEnc)
         saveFile = open(fileName,"w")
         saveFile.write(str(sideHTML))
         saveFile.close()
