@@ -63,8 +63,8 @@ def start():
 #önce linkleri tek tip haline getirmemiz lazım
 start()
 linkler=[]
-f=open('tst.txt','r')#linklerin olduğu txt dosyasını açtık
-linkSatirSayisi=lineCounter("tst.txt")
+f=open('links.txt','r')#linklerin olduğu txt dosyasını açtık
+linkSatirSayisi=lineCounter("links.txt")
 for i in range(0,linkSatirSayisi):
     linkler.append(f.readline())#Her linki bir indexe attık
 f.close()
@@ -180,10 +180,21 @@ for i in duzenliLinkler:
                 encodedInsideLinks.append(t)
             for z in differentRegLinks:#bütün farklı regulated linkleri de içinden isimlendirme yaptığımız listeye ekliyorum
                 regulatedInsideLinks.append(z)
-            print(regulatedInsideLinks)
-            print(encodedInsideLinks)
         
-        saveFile = open(fileName,"w")
+        silinecekler=[]
+        for o in range(0,len(encodedInsideLinks)):
+            if '../' in encodedInsideLinks[o]:
+                silinecekler.append(o)
+        silinecekler.reverse()
+        for u in silinecekler:
+            encodedInsideLinks.pop(u)
+            regulatedInsideLinks.pop(u)
+        encodedInsideLinks=list(filter(None, encodedInsideLinks))
+        regulatedInsideLinks=list(filter(None, regulatedInsideLinks))
+
+
+
+        saveFile = open(fileName,"w",encoding="utf-8")
         saveFile.write(str(sideHTML))
         saveFile.close()
         print("İndirme tamamlandı!")
