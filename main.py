@@ -1,4 +1,3 @@
-from ast import expr_context
 import urllib.request
 from bs4 import BeautifulSoup
 import os
@@ -32,7 +31,7 @@ def regulatedAndEncoded(HTMLSource):
     encodedInsideLinks=[]
     
     for j in insideLinks:
-        if re.search(r'html$',j) and not (re.search(r'^index.html',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
+        if re.search(r'html$',j) and not (re.search(r'^index.html',j) and not re.search(r'[.][.]',j)):#html ile biten ve index.html ile başlamayan bütün iç linkleri bir listeye atadık.bunun sebebi de arada youtube linkleri de olabiliyor, ilerde alt sayfaları gezmeye çalışırken sorun olacaktır
             regulatedInsideLinks.append(j)
     for k in regulatedInsideLinks:
         encodedInsideLinks.append(urllib.parse.quote(k))
@@ -145,18 +144,15 @@ for i in duzenliLinkler:
     print(orgI)
     isimlendirmeSayaci=0
     for l in encodedInsideLinks:#sonra her iç düzenli link için elimizdeki düzenli linki manipüle edip o adrese gidip html dosyasını indirip kaydediyoruz
-        print(encodedInsideLinks)
         os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
         fileName=regulatedInsideLinks[isimlendirmeSayaci]#baştaki uzantıyı alıyoruz ki onun adıyla bir html oluşturacağız
         cwdInside=cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator]
         lastPath=os.path.split(fileName)[1]
         if '/' in fileName:
             directoryNames=fileName.split('/')
-            print(directoryNames)
             for i in directoryNames:
                 if i != lastPath:
                     os.chdir(cwdInside)
-                    print(cwdInside)
                     try:
                         os.mkdir(i)
                     except FileExistsError:
@@ -167,17 +163,31 @@ for i in duzenliLinkler:
                 else:
                     os.chdir(cwdInside)
                     fileName=lastPath
-            
-        isimlendirmeSayaci+=1#artırıyoruz ikinci link adına geçsin diye
+        isimlendirmeSayaci+=1    
+        #artırıyoruz ikinci link adına geçsin diye
         l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
         print(l+ " linki indirilmeye başlandı...")
         sideHTML=getHTML(l)
-        insideReg,insideEnc=regulatedAndEncoded(sideHTML)
-        print(insideEnc)
+        insideReg,insideEnc=regulatedAndEncoded(sideHTML)#iç linklerimizin htmline bakıp içindeki linkleri hem regular hem encoded hale getirip atama yapıyoruz
+        sEnc=set(encodedInsideLinks)
+        sReg=set(regulatedInsideLinks)
+        if(all(x in encodedInsideLinks for x in insideEnc)):#burada iç htmldeki encoded linklerin listesinin indexteki linklerin listesinin alt kümesi olup olmadığını kontrol ediyoruz, eğer alt kümesi ise o zaman iç linkten gidebileceğiniz her yere index linkinden de gidebiliyoruz demektir
+            pass
+        else:#yok eğer iç linkte encoded haldeki linklerin listesinde farklı bir link varsa
+            differentEncLinks=[x for x in insideEnc if x not in sEnc]#o zaman indexte olmayıp insidelinklerde olan farklı linkleri yeni bir listeye attık, hem encoded hem regulated için iki sefer şart koymadım çünkü ikisi de aynı string listesinin farklı şekilde yazılmış halleri
+            differentRegLinks=[x for x in insideReg if x not in sReg]
+            for t in differentEncLinks:#bütün farklı encoded linkleri içinde dolaştığımız listeye ekliyorum
+                encodedInsideLinks.append(t)
+            for z in differentRegLinks:#bütün farklı regulated linkleri de içinden isimlendirme yaptığımız listeye ekliyorum
+                regulatedInsideLinks.append(z)
+            print(regulatedInsideLinks)
+            print(encodedInsideLinks)
+        
         saveFile = open(fileName,"w")
         saveFile.write(str(sideHTML))
         saveFile.close()
         print("İndirme tamamlandı!")
+        
     klasorIsimleriIterator+=1
     #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
 
