@@ -42,6 +42,8 @@ def getHTML(link):
         gcontext = ssl.SSLContext()
         req = urllib.request.Request(link, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
         requestingHTML= urllib.request.urlopen(req,context=gcontext).read()
+        decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
+        return decodedHTML
     except TimeoutError:
         print("Böyle bir bağlantı yok!")
         return "Böyle bir şey yok!"
@@ -50,8 +52,7 @@ def getHTML(link):
         return "Böyle bir şey yok!"
     except ConnectionResetError:
         getHTML(link)
-    decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
-    return decodedHTML
+    
 
 def start():
     try:
