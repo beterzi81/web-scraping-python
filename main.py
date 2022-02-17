@@ -74,13 +74,13 @@ for i in linkler:
     parseLink=urlparse(i)#her linki parçaladık
     normalizedPath=''
 
-    if not re.search(r'^/',str(parseLink.path)):
+    if not re.search(r'^/',str(parseLink.path)):#path kısmının başında / karakteri yoksa ekledik
         normalizedPath+='/'+str(parseLink.path)
         i= getBeforePath(parseLink)+ normalizedPath
     
     duzenliLinkler.append(i)
 ctr=0
-for i in duzenliLinkler:
+for i in duzenliLinkler:#düzenli linkleri her satıra bir link gelecek şekilde yerleştirdik
     i=i.rstrip('\n')
     duzenliLinkler[ctr]=i
     ctr+=1
@@ -108,10 +108,10 @@ for i in isimArray:#her isim için aynı adda bir klasör oluşturuldu,1 kez yap
     subprocess.run(command, capture_output=True, shell=True)
 '''
 klasorIsimleri=[]
-for i in duzenliLinkler:
+for i in duzenliLinkler:#isimlendirme için her linkin netloc kısmını alıp klasör ismi olarak gösterdik
     parseLink=urlparse(i)
     klasorIsimleri.append(parseLink.netloc)
-for i in klasorIsimleri:
+for i in klasorIsimleri:#klasör mevcut mu değil mi kontrol ettik
     try:
         os.mkdir("Siteler/"+i)  
         print(i+" adlı klasör oluşturuldu! ")
@@ -120,54 +120,50 @@ for i in klasorIsimleri:
 
 
 #########################Linklere gidip html içeriğini alma##########################
-cwd=os.getcwd()
-print(cwd)
-klasorIsimleriIterator=0
+cwd=os.getcwd()#şuanki adresimizi alıyoruz ki elimizde mutlak bir adres oluşturabilelim
+klasorIsimleriIterator=0#klasör isimlerini tek tek gezmek için bir iteratöre ihtiyacımız vardı
 for i in duzenliLinkler:
-    decodedHTML=getHTML(i)
+    decodedHTML=getHTML(i)#listedeki linkin html kısmını getirdik
     
-    indx="index.html"
-    os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
-    saveFile = open(indx,"w")
-    saveFile.write(str(decodedHTML))
-    saveFile.close()
-    #yukardaki cwd değişkeni tanımlamasından bu yorum satırına kadar olan kısım artık bir simülasyon değil gerçek bir çalışma halinde. bütün linklerden gelen index.html içeriği ilgili klasöre index.html adı altında oluşturulup kaydediliyor.
-
-
+    indx="index.html"#ilk olarak index sayfasını indirdiğimiz için index.html olarak adlandırdık
+    os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])#temiz bir şekilde klasörümüzü oluşturacağımız mutlak yolu seçiyoruz
+    saveFile = open(indx,"w",encoding='utf-8')#dosyamızı açtık
+    saveFile.write(str(decodedHTML))#içine html içeriğini yazdık
+    saveFile.close()#kapattık
+    #yukardaki cwd değişkeni tanımlamasından bu yorum satırına kadar olan kısım bütün linklerden gelen index.html içeriği ilgili klasöre index.html adı altında oluşturulup kaydediliyor.
     #döngümüze devam ederken alıp kaydettiğimiz index.html dosyasıyla işimiz daha bitmedi. burada bu içeriği fonksiyonumuza verip içinden isimlendirmede kullanacağımız regulatedInsideLinks ve path oluşturmada kullanacağımız encodedInsideLinks listesini elde ediyoruz
-    regulatedInsideLinks,encodedInsideLinks=regulatedAndEncoded(decodedHTML)
+    regulatedInsideLinks,encodedInsideLinks=regulatedAndEncoded(decodedHTML)#index.html dosyasının içindeki diğer .html uzantılı adresleri alıyoruz ve gerekli listelere atamalarımızı yapıyoruz,regulated dediğimiz düz bir şekilde yazım, encoded ise aynı stringin utf-8 haline dönüştürülmüşü, encoded olmazsa html isteği yollayamayız
     
     getPath=urlparse(i)#düzenli hale getirdiğimiz linkimizi parçalıyoruz
     pth=getPath.path#path kısmını alıyoruz
     lgt=len(os.path.split(pth)[1])#path kısmının en son kısmını alıyor bu fonksiyon
     orgI=i[:len(i) - lgt]#organized i değişkenimiz düzenli linkimizin son path kısmı çıkarılmış hali oluyor
-    print(orgI)
-    isimlendirmeSayaci=0
+    isimlendirmeSayaci=0#içerideki html dosyalarına isimlendirme için bu değişkeni tutuyoruz
     for l in encodedInsideLinks:#sonra her iç düzenli link için elimizdeki düzenli linki manipüle edip o adrese gidip html dosyasını indirip kaydediyoruz
-        os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])
+        os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])#ne olur ne olmaz diye tekrar mutlak adresini bildiğimiz konuma gidiyoruz
         fileName=regulatedInsideLinks[isimlendirmeSayaci]#baştaki uzantıyı alıyoruz ki onun adıyla bir html oluşturacağız
-        cwdInside=cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator]
-        lastPath=os.path.split(fileName)[1]
-        if '/' in fileName:
-            directoryNames=fileName.split('/')
+        cwdInside=cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator]#bu değişkeni, iç linklerin içinde olup indexte olmayan sayfaları bulmak için kullanıyoruz, daha doğrusu o türdeki linklerdeki path farklı olduğu için klasörleme sistemine ihtiyacımız olacak,bunu da bu değişken sağlayacak
+        lastPath=os.path.split(fileName)[1]#en sondaki .html kısımlı path parçasını alıyoruz
+        if '/' in fileName:#eğer path'ta / varsa burada klasörleme var demektir o zaman giriyoruz buraya
+            directoryNames=fileName.split('/')#path'ı / ile ayırıyoruz
             for i in directoryNames:
-                if i != lastPath:
-                    os.chdir(cwdInside)
+                if i != lastPath:#eğer path'taki son eleman olan .html'li kısımda değilsek
+                    os.chdir(cwdInside)#cwdinside yoluna gidiyoruz
                     try:
-                        os.mkdir(i)
-                    except FileExistsError:
-                        cwdInside=cwdInside+"/"+i
+                        os.mkdir(i)#mevcut pathı oluşturuyoruz
+                    except FileExistsError:#eğer varsa böyle bir klasör
+                        cwdInside=cwdInside+"/"+i#bir sonraki path kısmına geçişi hazırlıyoruz
                         continue
                     print(i + " oluşturuldu")
                     cwdInside=cwdInside+"/"+i
                 else:
-                    os.chdir(cwdInside)
+                    os.chdir(cwdInside)#eğer lastpath'taysak da tekrar bir geçiş yapıp en içe html dosyamızın adını veriyoruz
                     fileName=lastPath
         isimlendirmeSayaci+=1    
         #artırıyoruz ikinci link adına geçsin diye
         l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
         print(l+ " linki indirilmeye başlandı...")
-        sideHTML=getHTML(l)
+        sideHTML=getHTML(l)#içerdeki encode ettiğimiz linkin html içeriğini getirdik
         insideReg,insideEnc=regulatedAndEncoded(sideHTML)#iç linklerimizin htmline bakıp içindeki linkleri hem regular hem encoded hale getirip atama yapıyoruz
         sEnc=set(encodedInsideLinks)
         sReg=set(regulatedInsideLinks)
@@ -181,7 +177,7 @@ for i in duzenliLinkler:
             for z in differentRegLinks:#bütün farklı regulated linkleri de içinden isimlendirme yaptığımız listeye ekliyorum
                 regulatedInsideLinks.append(z)
         
-        silinecekler=[]
+        silinecekler=[]#eğer ../../ şeklinde göreceli olarak atanmış bir değer bulursak bunu çıkarmalıyız
         for o in range(0,len(encodedInsideLinks)):
             if '../' in encodedInsideLinks[o]:
                 silinecekler.append(o)
@@ -189,7 +185,7 @@ for i in duzenliLinkler:
         for u in silinecekler:
             encodedInsideLinks.pop(u)
             regulatedInsideLinks.pop(u)
-        encodedInsideLinks=list(filter(None, encodedInsideLinks))
+        encodedInsideLinks=list(filter(None, encodedInsideLinks))#Boş elemanları çıkarıyoruz ki indirmeye çalışmasın null linki
         regulatedInsideLinks=list(filter(None, regulatedInsideLinks))
 
 
@@ -199,7 +195,5 @@ for i in duzenliLinkler:
         saveFile.close()
         print("İndirme tamamlandı!")
         
-    klasorIsimleriIterator+=1
-    #Şimdi her iç linke gidip oradaki htmlleri de indirip içinde index'ten ve insideLinksArray'deki linklerden başka link var mı diye bakacağız
-
+    klasorIsimleriIterator+=1#ve ana linkimizin indexindeki, indexinin gösterdiği sayfaları ve iç sayfaların iç sayfalarını da indirdikten sonra diğer linke geçiyoruz
         

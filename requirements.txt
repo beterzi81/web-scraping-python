@@ -1,4 +1,4 @@
 Bu projeyi çalıştırmak için aşağıdaki kütüphaneleri indirip kurmanız gerekiyor:
 urllib
-subprocess
+ssl
 bs4
