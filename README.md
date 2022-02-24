@@ -1,6 +1,6 @@
 # Static Website Scraper
 
-Static Website Scraper, Python dili ile yazılmış, verilen statik sitelerin içeriğini bilgisayara indiren bir Web Scraping programıdır.
+Static Website Scraper, Python dili ile yazılmış, işletim sisteminden bağımsız çalışan, verilen statik sitelerin içeriğini bilgisayara indiren bir Web Scraping programıdır.
 
 
 # Kullanılan teknolojiler
