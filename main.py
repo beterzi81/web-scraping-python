@@ -82,7 +82,7 @@ for i in linkler:
     duzenliLinkler.append(i)
 ctr=0
 for i in duzenliLinkler:#düzenli linkleri her satıra bir link gelecek şekilde yerleştirdik
-    i=i.rstrip('\n')
+    i=i.replace("\n","")
     duzenliLinkler[ctr]=i
     ctr+=1
 '''
@@ -114,7 +114,7 @@ for i in duzenliLinkler:#isimlendirme için her linkin netloc kısmını alıp k
     klasorIsimleri.append(parseLink.netloc)
 for i in klasorIsimleri:#klasör mevcut mu değil mi kontrol ettik
     try:
-        os.mkdir("Siteler/"+i)  
+        os.mkdir("Siteler" + os.sep + i )
         print(i+" adlı klasör oluşturuldu! ")
     except FileExistsError:
         print(i+ " adlı klasör zaten mevcut!")
