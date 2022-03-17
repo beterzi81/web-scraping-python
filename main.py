@@ -1,4 +1,4 @@
-from email.policy import default
+from pydoc import doc
 import urllib.request
 from bs4 import BeautifulSoup
 import os
@@ -65,6 +65,8 @@ def start():
 #önce linkleri tek tip haline getirmemiz lazım
 start()
 pageNotFound='PAGE NOT FOUND, FILE NOT FOUND or WEBSITE NOT FOUND!!!'#hedef site bulunamadığında default olarak gönderilen sitede ayrıştırıcı string olarak bu stringi buldum ve bunu değişkende tutup indirdiğimiz htmllerde bulunup bulunmadığını tespit edip sayfanın var olup olmadığını kontrol ediyoruz
+adBanner='<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>'#bu etiket freeWHA sitesinin reklan bannerının html kodu, bunu indirdiğimiz htmllerden kaldıracağız
+
 linkler=[]
 f=open('links.txt','r')#linklerin olduğu txt dosyasını açtık
 linkSatirSayisi=lineCounter("links.txt")
@@ -127,6 +129,8 @@ cwd=os.getcwd()#şuanki adresimizi alıyoruz ki elimizde mutlak bir adres oluşt
 klasorIsimleriIterator=0#klasör isimlerini tek tek gezmek için bir iteratöre ihtiyacımız vardı
 for i in duzenliLinkler:
     decodedHTML=getHTML(i)#listedeki linkin html kısmını getirdik
+    if adBanner in decodedHTML:
+        decodedHTML=decodedHTML.replace(adBanner,' ')
     if not (pageNotFound in decodedHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
         indx="index.html"#ilk olarak index sayfasını indirdiğimiz için index.html olarak adlandırdık
         os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])#temiz bir şekilde klasörümüzü oluşturacağımız mutlak yolu seçiyoruz
@@ -170,6 +174,8 @@ for i in duzenliLinkler:
         l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
         print(l+ " linki indirilmeye başlandı...")
         sideHTML=getHTML(l)#içerdeki encode ettiğimiz linkin html içeriğini getirdik
+        if adBanner in sideHTML:
+            sideHTML=sideHTML.replace(adBanner,' ')
         if not(pageNotFound in sideHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
             insideReg,insideEnc=regulatedAndEncoded(sideHTML)#iç linklerimizin htmline bakıp içindeki linkleri hem regular hem encoded hale getirip atama yapıyoruz
             sEnc=set(encodedInsideLinks)
