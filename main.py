@@ -1,3 +1,4 @@
+from email.policy import default
 import urllib.request
 from bs4 import BeautifulSoup
 import os
@@ -46,10 +47,10 @@ def getHTML(link):
         return decodedHTML
     except TimeoutError:
         print("Böyle bir bağlantı yok!")
-        return "Böyle bir şey yok!"
+        return 1
     except urllib.error.URLError:
         print("Böyle bir bağlantı yok!")
-        return "Böyle bir şey yok!"
+        return 1
     except ConnectionResetError:
         getHTML(link)
     
@@ -63,6 +64,7 @@ def start():
 #########################Linkleri listeye aktarma##########################
 #önce linkleri tek tip haline getirmemiz lazım
 start()
+pageNotFound='PAGE NOT FOUND, FILE NOT FOUND or WEBSITE NOT FOUND!!!'#hedef site bulunamadığında default olarak gönderilen sitede ayrıştırıcı string olarak bu stringi buldum ve bunu değişkende tutup indirdiğimiz htmllerde bulunup bulunmadığını tespit edip sayfanın var olup olmadığını kontrol ediyoruz
 linkler=[]
 f=open('links.txt','r')#linklerin olduğu txt dosyasını açtık
 linkSatirSayisi=lineCounter("links.txt")
@@ -125,12 +127,15 @@ cwd=os.getcwd()#şuanki adresimizi alıyoruz ki elimizde mutlak bir adres oluşt
 klasorIsimleriIterator=0#klasör isimlerini tek tek gezmek için bir iteratöre ihtiyacımız vardı
 for i in duzenliLinkler:
     decodedHTML=getHTML(i)#listedeki linkin html kısmını getirdik
-    
-    indx="index.html"#ilk olarak index sayfasını indirdiğimiz için index.html olarak adlandırdık
-    os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])#temiz bir şekilde klasörümüzü oluşturacağımız mutlak yolu seçiyoruz
-    saveFile = open(indx,"w",encoding='utf-8')#dosyamızı açtık
-    saveFile.write(str(decodedHTML))#içine html içeriğini yazdık
-    saveFile.close()#kapattık
+    if not (pageNotFound in decodedHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
+        indx="index.html"#ilk olarak index sayfasını indirdiğimiz için index.html olarak adlandırdık
+        os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])#temiz bir şekilde klasörümüzü oluşturacağımız mutlak yolu seçiyoruz
+        
+        saveFile = open(indx,"w",encoding='utf-8')#dosyamızı açtık
+        saveFile.write(str(decodedHTML))#içine html içeriğini yazdık
+        saveFile.close()#kapattık
+    else:
+        print("Böyle bir dosya yok!")
     #yukardaki cwd değişkeni tanımlamasından bu yorum satırına kadar olan kısım bütün linklerden gelen index.html içeriği ilgili klasöre index.html adı altında oluşturulup kaydediliyor.
     #döngümüze devam ederken alıp kaydettiğimiz index.html dosyasıyla işimiz daha bitmedi. burada bu içeriği fonksiyonumuza verip içinden isimlendirmede kullanacağımız regulatedInsideLinks ve path oluşturmada kullanacağımız encodedInsideLinks listesini elde ediyoruz
     regulatedInsideLinks,encodedInsideLinks=regulatedAndEncoded(decodedHTML)#index.html dosyasının içindeki diğer .html uzantılı adresleri alıyoruz ve gerekli listelere atamalarımızı yapıyoruz,regulated dediğimiz düz bir şekilde yazım, encoded ise aynı stringin utf-8 haline dönüştürülmüşü, encoded olmazsa html isteği yollayamayız
@@ -165,36 +170,38 @@ for i in duzenliLinkler:
         l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
         print(l+ " linki indirilmeye başlandı...")
         sideHTML=getHTML(l)#içerdeki encode ettiğimiz linkin html içeriğini getirdik
-        insideReg,insideEnc=regulatedAndEncoded(sideHTML)#iç linklerimizin htmline bakıp içindeki linkleri hem regular hem encoded hale getirip atama yapıyoruz
-        sEnc=set(encodedInsideLinks)
-        sReg=set(regulatedInsideLinks)
-        if(all(x in encodedInsideLinks for x in insideEnc)):#burada iç htmldeki encoded linklerin listesinin indexteki linklerin listesinin alt kümesi olup olmadığını kontrol ediyoruz, eğer alt kümesi ise o zaman iç linkten gidebileceğiniz her yere index linkinden de gidebiliyoruz demektir
-            pass
-        else:#yok eğer iç linkte encoded haldeki linklerin listesinde farklı bir link varsa
-            differentEncLinks=[x for x in insideEnc if x not in sEnc]#o zaman indexte olmayıp insidelinklerde olan farklı linkleri yeni bir listeye attık, hem encoded hem regulated için iki sefer şart koymadım çünkü ikisi de aynı string listesinin farklı şekilde yazılmış halleri
-            differentRegLinks=[x for x in insideReg if x not in sReg]
-            for t in differentEncLinks:#bütün farklı encoded linkleri içinde dolaştığımız listeye ekliyorum
-                encodedInsideLinks.append(t)
-            for z in differentRegLinks:#bütün farklı regulated linkleri de içinden isimlendirme yaptığımız listeye ekliyorum
-                regulatedInsideLinks.append(z)
+        if not(pageNotFound in sideHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
+            insideReg,insideEnc=regulatedAndEncoded(sideHTML)#iç linklerimizin htmline bakıp içindeki linkleri hem regular hem encoded hale getirip atama yapıyoruz
+            sEnc=set(encodedInsideLinks)
+            sReg=set(regulatedInsideLinks)
+            if(all(x in encodedInsideLinks for x in insideEnc)):#burada iç htmldeki encoded linklerin listesinin indexteki linklerin listesinin alt kümesi olup olmadığını kontrol ediyoruz, eğer alt kümesi ise o zaman iç linkten gidebileceğiniz her yere index linkinden de gidebiliyoruz demektir
+                pass
+            else:#yok eğer iç linkte encoded haldeki linklerin listesinde farklı bir link varsa
+                differentEncLinks=[x for x in insideEnc if x not in sEnc]#o zaman indexte olmayıp insidelinklerde olan farklı linkleri yeni bir listeye attık, hem encoded hem regulated için iki sefer şart koymadım çünkü ikisi de aynı string listesinin farklı şekilde yazılmış halleri
+                differentRegLinks=[x for x in insideReg if x not in sReg]
+                for t in differentEncLinks:#bütün farklı encoded linkleri içinde dolaştığımız listeye ekliyorum
+                    encodedInsideLinks.append(t)
+                for z in differentRegLinks:#bütün farklı regulated linkleri de içinden isimlendirme yaptığımız listeye ekliyorum
+                    regulatedInsideLinks.append(z)
+            
+            silinecekler=[]#eğer ../../ şeklinde göreceli olarak atanmış bir değer bulursak bunu çıkarmalıyız
+            for o in range(0,len(encodedInsideLinks)):
+                if '../' in encodedInsideLinks[o]:
+                    silinecekler.append(o)
+            silinecekler.reverse()
+            for u in silinecekler:
+                encodedInsideLinks.pop(u)
+                regulatedInsideLinks.pop(u)
+            encodedInsideLinks=list(filter(None, encodedInsideLinks))#Boş elemanları çıkarıyoruz ki indirmeye çalışmasın null linki
+            regulatedInsideLinks=list(filter(None, regulatedInsideLinks))
+
+
         
-        silinecekler=[]#eğer ../../ şeklinde göreceli olarak atanmış bir değer bulursak bunu çıkarmalıyız
-        for o in range(0,len(encodedInsideLinks)):
-            if '../' in encodedInsideLinks[o]:
-                silinecekler.append(o)
-        silinecekler.reverse()
-        for u in silinecekler:
-            encodedInsideLinks.pop(u)
-            regulatedInsideLinks.pop(u)
-        encodedInsideLinks=list(filter(None, encodedInsideLinks))#Boş elemanları çıkarıyoruz ki indirmeye çalışmasın null linki
-        regulatedInsideLinks=list(filter(None, regulatedInsideLinks))
-
-
-
-        saveFile = open(fileName,"w",encoding="utf-8")
-        saveFile.write(str(sideHTML))
-        saveFile.close()
-        print("İndirme tamamlandı!")
-        
+            saveFile = open(fileName,"w",encoding="utf-8")
+            saveFile.write(str(sideHTML))
+            saveFile.close()
+            print("İndirme tamamlandı!")
+        else:
+            print("Böyle bir dosya yok!")
     klasorIsimleriIterator+=1#ve ana linkimizin indexindeki, indexinin gösterdiği sayfaları ve iç sayfaların iç sayfalarını da indirdikten sonra diğer linke geçiyoruz
         
