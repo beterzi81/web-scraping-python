@@ -18,6 +18,25 @@ def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bul
     file.close()
     return line_count
 
+def tokenize(d):#verilen parametredeki html tag'ini tokenize ediyor ve temel tag olarak döndürüyor
+  yield f'<{d.name}>'
+  for i in d.contents:
+     if not isinstance(i, str):
+       yield from tokenize(i)
+     else:
+       yield from i.split()
+  yield f'</{d.name}>'
+
+
+def filtertokenized(rawHTML):
+    tokenizedHTML = list(tokenize(BeautifulSoup(rawHTML, 'html.parser')))#html belgesini tokenize ediyoruz
+    filteredHTML = [item for item in tokenizedHTML if bool(BeautifulSoup(item, "html.parser").find())]#bu tokenize edilmiş elemanların içinden html tagi olmayanları ayıklıyoruz
+    toList=''
+    for i in filteredHTML:#veritabanımıza girerken text olarak gireceğiz bu yüzden list türündeki filteredHTML değişkenini bir str değişkenine dönüştürüyoruz
+        toList+=i
+    return toList
+
+
 def getBeforePath(parsedURL):
     return parsedURL.scheme+ '://'+ parsedURL.netloc
 
@@ -142,7 +161,8 @@ for i in duzenliLinkler:
     if not (pageNotFound in decodedHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
         indx="index.html"#ilk olarak index sayfasını indirdiğimiz için index.html olarak adlandırdık
         os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])#temiz bir şekilde klasörümüzü oluşturacağımız mutlak yolu seçiyoruz
-        cursor.execute("INSERT OR IGNORE INTO siteler (site_adi,dosya_adi,dosya_icerigi) VALUES(?,?,?)",(klasorIsimleri[klasorIsimleriIterator],indx,decodedHTML))#index sayfamızı bu şekilde insert ettik
+        structureOfHTML=filtertokenized(decodedHTML)
+        cursor.execute("INSERT OR IGNORE INTO siteler (site_adi,dosya_adi,dosya_icerigi) VALUES(?,?,?)",(klasorIsimleri[klasorIsimleriIterator],indx,structureOfHTML))#index sayfamızı bu şekilde insert ettik
         saveFile = open(indx,"w",encoding='utf-8')#dosyamızı açtık
         saveFile.write(str(decodedHTML))#içine html içeriğini yazdık
         saveFile.close()#kapattık
@@ -208,8 +228,8 @@ for i in duzenliLinkler:
                 regulatedInsideLinks.pop(u)
             encodedInsideLinks=list(filter(None, encodedInsideLinks))#Boş elemanları çıkarıyoruz ki indirmeye çalışmasın null linki
             regulatedInsideLinks=list(filter(None, regulatedInsideLinks))
-
-            cursor.execute("INSERT OR IGNORE INTO siteler (site_adi,dosya_adi,dosya_icerigi) VALUES(?,?,?)",(klasorIsimleri[klasorIsimleriIterator],fileName,sideHTML))#index sayfamızı bu şekilde insert ettik
+            structureOfSideHTML=filtertokenized(sideHTML)
+            cursor.execute("INSERT OR IGNORE INTO siteler (site_adi,dosya_adi,dosya_icerigi) VALUES(?,?,?)",(klasorIsimleri[klasorIsimleriIterator],fileName,structureOfSideHTML))#index sayfamızı bu şekilde insert ettik
             saveFile = open(fileName,"w",encoding="utf-8")
             saveFile.write(str(sideHTML))
             saveFile.close()
