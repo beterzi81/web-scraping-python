@@ -1,4 +1,4 @@
-from pydoc import doc
+from fileinput import filename
 import urllib.request
 from bs4 import BeautifulSoup
 import os
@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 import re
 import os.path
 import ssl
+import sqlite3
 
 #########################Gerekli fonksiyonların tanımlanması##########################
 def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bulan fonksiyon 
@@ -64,6 +65,13 @@ def start():
 #########################Linkleri listeye aktarma##########################
 #önce linkleri tek tip haline getirmemiz lazım
 start()
+database_connect = sqlite3.connect("siteler.db")#Database'imizi oluşturuyoruz
+cursor=database_connect.cursor()#imlecimizi de atadık
+temizlensin_mi=input("Daha önceden oluşturulmuş veritabanını temizlemek istiyor musunuz? (İstiyorsanız e/E girişini yapın, istemiyorsanız herhangi bir tuşa basın.)\n")
+if temizlensin_mi=='E' or temizlensin_mi=='e':
+    print("sa")
+    cursor.execute("DROP TABLE IF EXISTS siteler")#E girişi verilirse tablumuzu siliyoruz
+cursor.execute("CREATE TABLE IF NOT EXISTS siteler(id INTEGER PRIMARY KEY AUTOINCREMENT,site_adi TEXT,dosya_adi TEXT,dosya_icerigi TEXT,UNIQUE(site_adi, dosya_adi))")#tablomuzu da oluşturduk
 pageNotFound='PAGE NOT FOUND, FILE NOT FOUND or WEBSITE NOT FOUND!!!'#hedef site bulunamadığında default olarak gönderilen sitede ayrıştırıcı string olarak bu stringi buldum ve bunu değişkende tutup indirdiğimiz htmllerde bulunup bulunmadığını tespit edip sayfanın var olup olmadığını kontrol ediyoruz
 adBanner='<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>'#bu etiket freeWHA sitesinin reklan bannerının html kodu, bunu indirdiğimiz htmllerden kaldıracağız
 
@@ -134,7 +142,7 @@ for i in duzenliLinkler:
     if not (pageNotFound in decodedHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
         indx="index.html"#ilk olarak index sayfasını indirdiğimiz için index.html olarak adlandırdık
         os.chdir(cwd+"/Siteler/"+klasorIsimleri[klasorIsimleriIterator])#temiz bir şekilde klasörümüzü oluşturacağımız mutlak yolu seçiyoruz
-        
+        cursor.execute("INSERT OR IGNORE INTO siteler (site_adi,dosya_adi,dosya_icerigi) VALUES(?,?,?)",(klasorIsimleri[klasorIsimleriIterator],indx,decodedHTML))#index sayfamızı bu şekilde insert ettik
         saveFile = open(indx,"w",encoding='utf-8')#dosyamızı açtık
         saveFile.write(str(decodedHTML))#içine html içeriğini yazdık
         saveFile.close()#kapattık
@@ -201,8 +209,7 @@ for i in duzenliLinkler:
             encodedInsideLinks=list(filter(None, encodedInsideLinks))#Boş elemanları çıkarıyoruz ki indirmeye çalışmasın null linki
             regulatedInsideLinks=list(filter(None, regulatedInsideLinks))
 
-
-        
+            cursor.execute("INSERT OR IGNORE INTO siteler (site_adi,dosya_adi,dosya_icerigi) VALUES(?,?,?)",(klasorIsimleri[klasorIsimleriIterator],fileName,sideHTML))#index sayfamızı bu şekilde insert ettik
             saveFile = open(fileName,"w",encoding="utf-8")
             saveFile.write(str(sideHTML))
             saveFile.close()
@@ -210,4 +217,4 @@ for i in duzenliLinkler:
         else:
             print("Böyle bir dosya yok!")
     klasorIsimleriIterator+=1#ve ana linkimizin indexindeki, indexinin gösterdiği sayfaları ve iç sayfaların iç sayfalarını da indirdikten sonra diğer linke geçiyoruz
-        
+database_connect.commit()
