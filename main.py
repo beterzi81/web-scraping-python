@@ -1,4 +1,4 @@
-from fileinput import filename
+import getJSsites
 import urllib.request
 from bs4 import BeautifulSoup
 import os
@@ -87,16 +87,16 @@ start()
 database_connect = sqlite3.connect("siteler.db")#Database'imizi oluşturuyoruz
 cursor=database_connect.cursor()#imlecimizi de atadık
 temizlensin_mi=input("Daha önceden oluşturulmuş veritabanını temizlemek istiyor musunuz? (İstiyorsanız e/E girişini yapın, istemiyorsanız herhangi bir tuşa basın.)\n")
+needSelenium='This site requires Javascript to work, please enable Javascript in your browser or use a browser with Javascript support'#bazı siteler freewebhosting dışında hosting kullandığı için javascript desteği gerekiyor, request ile js gerektiren siteler alınamadığı için bu siteleri selenium ile almamız gerekiyor
 if temizlensin_mi=='E' or temizlensin_mi=='e':
-    print("sa")
     cursor.execute("DROP TABLE IF EXISTS siteler")#E girişi verilirse tablumuzu siliyoruz
 cursor.execute("CREATE TABLE IF NOT EXISTS siteler(id INTEGER PRIMARY KEY AUTOINCREMENT,site_adi TEXT,dosya_adi TEXT,dosya_icerigi TEXT,UNIQUE(site_adi, dosya_adi))")#tablomuzu da oluşturduk
 pageNotFound='PAGE NOT FOUND, FILE NOT FOUND or WEBSITE NOT FOUND!!!'#hedef site bulunamadığında default olarak gönderilen sitede ayrıştırıcı string olarak bu stringi buldum ve bunu değişkende tutup indirdiğimiz htmllerde bulunup bulunmadığını tespit edip sayfanın var olup olmadığını kontrol ediyoruz
 adBanner='<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>'#bu etiket freeWHA sitesinin reklan bannerının html kodu, bunu indirdiğimiz htmllerden kaldıracağız
 
 linkler=[]
-f=open('links.txt','r')#linklerin olduğu txt dosyasını açtık
-linkSatirSayisi=lineCounter("links.txt")
+f=open('a.txt','r')#linklerin olduğu txt dosyasını açtık
+linkSatirSayisi=lineCounter("a.txt")
 for i in range(0,linkSatirSayisi):
     linkler.append(f.readline())#Her linki bir indexe attık
 f.close()
@@ -154,8 +154,14 @@ for i in klasorIsimleri:#klasör mevcut mu değil mi kontrol ettik
 #########################Linklere gidip html içeriğini alma##########################
 cwd=os.getcwd()#şuanki adresimizi alıyoruz ki elimizde mutlak bir adres oluşturabilelim
 klasorIsimleriIterator=0#klasör isimlerini tek tek gezmek için bir iteratöre ihtiyacımız vardı
+seleniumSites=[]
 for i in duzenliLinkler:
     decodedHTML=getHTML(i)#listedeki linkin html kısmını getirdik
+    if needSelenium in decodedHTML:
+        seleniumSites.append(klasorIsimleri[klasorIsimleriIterator])
+        getJSsites.getSite(klasorIsimleri[klasorIsimleriIterator])
+        klasorIsimleriIterator+=1
+        continue
     if adBanner in decodedHTML:
         decodedHTML=decodedHTML.replace(adBanner,' ')
     if not (pageNotFound in decodedHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
@@ -238,3 +244,8 @@ for i in duzenliLinkler:
             print("Böyle bir dosya yok!")
     klasorIsimleriIterator+=1#ve ana linkimizin indexindeki, indexinin gösterdiği sayfaları ve iç sayfaların iç sayfalarını da indirdikten sonra diğer linke geçiyoruz
 database_connect.commit()
+f=open('selenium_sites.txt','w')
+for i in seleniumSites:
+    f.write(i+'\n')
+f.close()
+
