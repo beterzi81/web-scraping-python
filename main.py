@@ -60,7 +60,7 @@ def regulatedAndEncoded(HTMLSource):
 
 def getHTML(link):
     try: 
-        gcontext = ssl.SSLContext()
+        gcontext = ssl.create_default_context()
         req = urllib.request.Request(link, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
         requestingHTML= urllib.request.urlopen(req,context=gcontext).read()
         decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
@@ -156,12 +156,11 @@ cwd=os.getcwd()#şuanki adresimizi alıyoruz ki elimizde mutlak bir adres oluşt
 klasorIsimleriIterator=0#klasör isimlerini tek tek gezmek için bir iteratöre ihtiyacımız vardı
 seleniumSites=[]
 for i in duzenliLinkler:
+    print(i)
     decodedHTML=getHTML(i)#listedeki linkin html kısmını getirdik
     if needSelenium in decodedHTML:
         seleniumSites.append(klasorIsimleri[klasorIsimleriIterator])
-        getJSsites.getSite(klasorIsimleri[klasorIsimleriIterator])
-        klasorIsimleriIterator+=1
-        continue
+        decodedHTML=getJSsites.getSite(i)
     if adBanner in decodedHTML:
         decodedHTML=decodedHTML.replace(adBanner,' ')
     if not (pageNotFound in decodedHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
@@ -177,7 +176,9 @@ for i in duzenliLinkler:
     #yukardaki cwd değişkeni tanımlamasından bu yorum satırına kadar olan kısım bütün linklerden gelen index.html içeriği ilgili klasöre index.html adı altında oluşturulup kaydediliyor.
     #döngümüze devam ederken alıp kaydettiğimiz index.html dosyasıyla işimiz daha bitmedi. burada bu içeriği fonksiyonumuza verip içinden isimlendirmede kullanacağımız regulatedInsideLinks ve path oluşturmada kullanacağımız encodedInsideLinks listesini elde ediyoruz
     regulatedInsideLinks,encodedInsideLinks=regulatedAndEncoded(decodedHTML)#index.html dosyasının içindeki diğer .html uzantılı adresleri alıyoruz ve gerekli listelere atamalarımızı yapıyoruz,regulated dediğimiz düz bir şekilde yazım, encoded ise aynı stringin utf-8 haline dönüştürülmüşü, encoded olmazsa html isteği yollayamayız
-    
+    if len(encodedInsideLinks)==0:#bazen ilk seferde htmli düzgün indirmediği için encodedinsidelinks bulamıyor
+        
+        pass
     getPath=urlparse(i)#düzenli hale getirdiğimiz linkimizi parçalıyoruz
     pth=getPath.path#path kısmını alıyoruz
     lgt=len(os.path.split(pth)[1])#path kısmının en son kısmını alıyor bu fonksiyon
@@ -208,6 +209,8 @@ for i in duzenliLinkler:
         l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
         print(l+ " linki indirilmeye başlandı...")
         sideHTML=getHTML(l)#içerdeki encode ettiğimiz linkin html içeriğini getirdik
+        if needSelenium in sideHTML:
+            sideHTML=getJSsites.getSite(l)
         if adBanner in sideHTML:
             sideHTML=sideHTML.replace(adBanner,' ')
         if not(pageNotFound in sideHTML):#aldığımız html default html değilse işlemimizi gerçekleştiriyoruz
@@ -244,6 +247,7 @@ for i in duzenliLinkler:
             print("Böyle bir dosya yok!")
     klasorIsimleriIterator+=1#ve ana linkimizin indexindeki, indexinin gösterdiği sayfaları ve iç sayfaların iç sayfalarını da indirdikten sonra diğer linke geçiyoruz
 database_connect.commit()
+os.chdir(cwd)
 f=open('selenium_sites.txt','w')
 for i in seleniumSites:
     f.write(i+'\n')

@@ -1,6 +1,8 @@
-from selenium import webdriver
-import time
-from webdriver_manager.chrome import OperaDriverManager
+import sys
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QUrl
+from PyQt5.QtWebEngineWidgets import QWebEngineView
+
 
 def main():
     pass
@@ -10,12 +12,23 @@ if __name__ == "__main__":
 
 
 def getSite(site):
-    browser=webdriver.Opera(executable_path=OperaDriverManager().install())#browserımızı çalıştırıyoruz
-    browser.get("https://"+site)
-    html = browser.page_source
-    time.sleep(2)
-    browser.close()
-    print(html)
-    print("-"*100)
+    class Render(QWebEngineView):
+        def __init__(self, url):
+            self.html = None
+            self.app = QApplication(sys.argv)
+            QWebEngineView.__init__(self)
+            self.loadFinished.connect(self._loadFinished)
+            self.load(QUrl(url))
+            self.app.exec_()
 
+        def _loadFinished(self, result):
+            # This is an async call, you need to wait for this
+            # to be called before closing the app
+            self.page().toHtml(self._callable)
 
+        def _callable(self, data):
+            self.html = data
+            # Data has been stored, it's safe to quit the app
+            self.app.quit()
+
+    return Render(site).html
