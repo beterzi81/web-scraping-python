@@ -7,6 +7,8 @@ import re
 import os.path
 import ssl
 import sqlite3
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='bs4')#beautifulsoup'taki zararsız kullanıcı uyarılarını engelliyoruz
 
 #########################Gerekli fonksiyonların tanımlanması##########################
 def lineCounter(filename):#Parametreyle verilen dosyanın satır sayısını bulan fonksiyon 
@@ -35,6 +37,7 @@ def filtertokenized(rawHTML):
     for i in filteredHTML:#veritabanımıza girerken text olarak gireceğiz bu yüzden list türündeki filteredHTML değişkenini bir str değişkenine dönüştürüyoruz
         toList+=i
     return toList
+
 
 
 def getBeforePath(parsedURL):
@@ -66,11 +69,11 @@ def getHTML(link):
         decodedHTML=requestingHTML.decode("utf-8",errors='ignore')
         return decodedHTML
     except TimeoutError:
-        print("Böyle bir bağlantı yok!")
-        return 1
+        print("Böyle bir bağlantı olmayabilir, selenium ile denenecek!")
+        return "1"
     except urllib.error.URLError:
-        print("Böyle bir bağlantı yok!")
-        return 1
+        print("Böyle bir bağlantı olmayabilir, selenium ile denenecek!")
+        return "1"
     except ConnectionResetError:
         getHTML(link)
     
@@ -95,8 +98,8 @@ pageNotFound='PAGE NOT FOUND, FILE NOT FOUND or WEBSITE NOT FOUND!!!'#hedef site
 adBanner='<div style="text-align:right;position:fixed;bottom:3px;right:3px;width:100%;z-index:999999;cursor:pointer;line-height:0;display:block;"><a target="_blank" href="https://www.freewebhostingarea.com" title="Free Web Hosting with PHP5 or PHP7"><img alt="Free Web Hosting" src="https://www.freewebhostingarea.com/images/poweredby.png" style="border-width: 0px;width: 180px; height: 45px; float: right;"></a></div>'#bu etiket freeWHA sitesinin reklan bannerının html kodu, bunu indirdiğimiz htmllerden kaldıracağız
 
 linkler=[]
-f=open('a.txt','r')#linklerin olduğu txt dosyasını açtık
-linkSatirSayisi=lineCounter("a.txt")
+f=open('links.txt','r')#linklerin olduğu txt dosyasını açtık
+linkSatirSayisi=lineCounter("links.txt")
 for i in range(0,linkSatirSayisi):
     linkler.append(f.readline())#Her linki bir indexe attık
 f.close()
@@ -154,11 +157,10 @@ for i in klasorIsimleri:#klasör mevcut mu değil mi kontrol ettik
 #########################Linklere gidip html içeriğini alma##########################
 cwd=os.getcwd()#şuanki adresimizi alıyoruz ki elimizde mutlak bir adres oluşturabilelim
 klasorIsimleriIterator=0#klasör isimlerini tek tek gezmek için bir iteratöre ihtiyacımız vardı
-seleniumSites=[]
+seleniumSites=[]#selenium kullandığımız siteleri bu listte topluyoruz
 for i in duzenliLinkler:
-    print(i)
     decodedHTML=getHTML(i)#listedeki linkin html kısmını getirdik
-    if needSelenium in decodedHTML:
+    if needSelenium in decodedHTML or decodedHTML=="1":#içinde js istediğini bildiğimiz veya normal şekilde indiremediğimiz siteleri selenium ile indiriyoruz
         seleniumSites.append(klasorIsimleri[klasorIsimleriIterator])
         decodedHTML=getJSsites.getSite(i)
     if adBanner in decodedHTML:
@@ -176,9 +178,6 @@ for i in duzenliLinkler:
     #yukardaki cwd değişkeni tanımlamasından bu yorum satırına kadar olan kısım bütün linklerden gelen index.html içeriği ilgili klasöre index.html adı altında oluşturulup kaydediliyor.
     #döngümüze devam ederken alıp kaydettiğimiz index.html dosyasıyla işimiz daha bitmedi. burada bu içeriği fonksiyonumuza verip içinden isimlendirmede kullanacağımız regulatedInsideLinks ve path oluşturmada kullanacağımız encodedInsideLinks listesini elde ediyoruz
     regulatedInsideLinks,encodedInsideLinks=regulatedAndEncoded(decodedHTML)#index.html dosyasının içindeki diğer .html uzantılı adresleri alıyoruz ve gerekli listelere atamalarımızı yapıyoruz,regulated dediğimiz düz bir şekilde yazım, encoded ise aynı stringin utf-8 haline dönüştürülmüşü, encoded olmazsa html isteği yollayamayız
-    if len(encodedInsideLinks)==0:#bazen ilk seferde htmli düzgün indirmediği için encodedinsidelinks bulamıyor
-        
-        pass
     getPath=urlparse(i)#düzenli hale getirdiğimiz linkimizi parçalıyoruz
     pth=getPath.path#path kısmını alıyoruz
     lgt=len(os.path.split(pth)[1])#path kısmının en son kısmını alıyor bu fonksiyon
@@ -209,7 +208,7 @@ for i in duzenliLinkler:
         l=orgI+l#encode edilmiş html pathımızı organize edilmiş netloc ve scheme kısmıyla birleştirip bütün linki çıkarttık
         print(l+ " linki indirilmeye başlandı...")
         sideHTML=getHTML(l)#içerdeki encode ettiğimiz linkin html içeriğini getirdik
-        if needSelenium in sideHTML:
+        if needSelenium in sideHTML or sideHTML=="1":
             sideHTML=getJSsites.getSite(l)
         if adBanner in sideHTML:
             sideHTML=sideHTML.replace(adBanner,' ')
@@ -248,7 +247,7 @@ for i in duzenliLinkler:
     klasorIsimleriIterator+=1#ve ana linkimizin indexindeki, indexinin gösterdiği sayfaları ve iç sayfaların iç sayfalarını da indirdikten sonra diğer linke geçiyoruz
 database_connect.commit()
 os.chdir(cwd)
-f=open('selenium_sites.txt','w')
+f=open('selenium_sites.txt','w')#selenium kullanarak indirdiğimiz siteleri bir txt dosyasına yazdırıyoruz, bu ek bir özelliktir gerek yok ama bence iyi
 for i in seleniumSites:
     f.write(i+'\n')
 f.close()

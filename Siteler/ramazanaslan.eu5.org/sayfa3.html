@@ -1,169 +1,169 @@
-<html>
-<head>
-<title>Materyaller</title>
-<link rel="icon" href="images\favicon.png" type="image/x-icon">
-<meta charset="utf-8">
-<meta name="description" content="blender">
-<meta name="keywords" content="blender,materyal,render,pokemon,pokemon top,top,değiştiriciler">
-</head>
-<body bgcolor="#94210c">
-
-<table border="1" bordercolor="#ffffff" cellspacing="0" cellpadding="0" align="center">
-<tr>
-<td colspan="2" height="220" bgcolor="#E76D0F">
-<a href="index.html"><img src="images\logomat.png" height="220"><img src="images\baslik2.png" height="220" width="1000"></a></td>
-</tr>
-
-<tr>
-<td colspan="2"  bgcolor="#6363C7" >
-<table border="3" cellspacing="0" cellpadding="0" bordercolor="#6363C7" align="center">
-<tr>                  
-<td height="50" width="300" bgcolor="#B6430F" align="center">
-<a href="sayfa1.html"><font size="5" face="verdana">Modelleme</font></a>
-</td>
-<td  width="300" bgcolor="#B6430F" align="center">
-<a href="sayfa2.html"><font size="5" face="verdana">Değiştiriciler</font></a>
-</td>
-<td  width="300" bgcolor="#B6430F" align="center">
-<a href="sayfa3.html"><font size="5" face="verdana">Materyaller</font></a>
-</td>
-<td  width="300" bgcolor="#B6430F" align="center">
-<a href="sayfa4.html"><font size="5" face="verdana">Render</font></a>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-
-<tr>
-<td height="1200" width="200" bgcolor="#E76D0F" valign="center">
-
-</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-<img src="images\mat\a1prin.png" width="200" >
-
-</td>
-
-<td width="1000" bgcolor="#F5AB2F" valign="top" align="center"></br></br></br><font size="22" color="#FF1122" face="Comic Sans MS">Materyaller</font></br></br></br>
-<font size="4" face="verdana">
-
-Kısaca renk vermeyi sağlar.Node sistemi ile yapılır.Eskiden bir materyal yapmak için bir sürü shader'i birleştirip kullanmak gerekliydi ama yeni bir shader çıktı ve sadece onu kullanarak basitçe materyallerimizi yapabiliyoruz.
-Materyallerin nasıl yapıldığını yaptığımız pokemon topu üzerinden göstereceğim.
-
-<h1><font color="#1144cc">Objeye birden fazla materyal vermek:</font></h1></br>
-
-Pokemon topunda kırmızı,siyah ve beyaz olmak üzere 3 tane renk olduğu için 3 tane materyal eklememiz lazım.Bunu yapabilmemiz için materyalleri oluşturduktan sonra hangi rengin nerede olduğunu seçtikten sonra teker teker Assign etmek.</br></br>
-İlk önce objemiz 3 tane materyal alacağı için 3 tane Materyal Slotunu açmamız lazım bunun için sağ alttaki materyal ikonuna tıklayıp sağ üstteki + ya 3 defa basalım.
-</br></br></br><img src="images\mat\mat1.png" width="700"></br></br></br>  
-
-Slotları açtık.Hemen slotlara materyallerimizi eklemek için sırasıyla seçerek new+ butonuna basalım.
-</br></br></br><img src="images\mat\mat2.png" width="700"></br></br></br> 
-
-İleride aklımızın karışmaması için isimlerini değiştirelim.
-</br></br></br><img src="images\mat\mat3.png" width="700"></br></br></br> 
-
-Materyallerimizi eklemiş olduk ama blendera hangi materyale nerede olduğunu söylemediğimiz için şuan sadece en üstteki materyali kullanıyor.Diğer materyallerin nerede olduğunu göstermek için Edit moda girip kareleri seçmemiz gerek.
-</br></br></br><img src="images\mat\mat4.png" width="700"></br></br></br> 
-
-Edit moda girdikten sonra bende kırmızı materyal seçili olduğu için kırmızı olması gereken materyalleri seçtim ve sağ üstteki Assign butonuna bastım.Kareleri daha kolay seçmek için W tuşuna basalım bu sayede fare ile çoklu seçim yapabiliriz.Shift tuşuna basılı tutarak fare ile seçimleri yapalım.
-Yanlış yerdeki kareleri seçmediğinize dikkat edin.
-</br></br></br><img src="images\mat\mat5.png" width="700"></br></br></br> 
-
-Aynısını siyah için yapalım.İlk önce sağ üstten siyah materyale basalım.Ve aynı şekilde siyah kareleri seçip Assign tuşuna basalım.Aynısını beyaz içinde yapalım.
-</br></br></br><img src="images\mat\mat6.png" width="700"></br></br></br> 
-
-Materyellerin yerlerini ayarladığımıza göre hemen basitçe renklerini verelim.Kırmızı materyali seçip Base Color kısmından kırmızı yapalım.
-</br></br></br><img src="images\mat\mat7.png" width="700"></br></br></br>
-
-Siyahı seçip siyah yapalım.
-</br></br></br><img src="images\mat\mat8.png" width="700"></br></br></br>
-
-Eğer farkettiyseniz materyallerin renklerini değiştirmiş olduğumuz halde herhangi bir değişiklik olmadı.Bunun sebebi topumuza şuan Solid-Shading ile bakıyor olmamız.Bu modda her materyal gri gözükür.Renkleri görmek için sağ üstten Material-Preview modunu seçelim.
-</br></br></br><img src="images\mat\mat9.png" width="700"></br></br></br>
-
-Böylelikle topumuza basitçe 3 renk vermiş olduk.Ve aslında topumuzun modellenip renklendirilmesini bitirmiş olduk.Ama daha karmaşık materyallerin nasıl yapıldığını göstermek için kırmızı materyalimizi kullanacağım.Daha karışık materyaller için sol üstten Shader-Editor'ü seçelim.
-</br></br></br><img src="images\mat\mat10.png" width="700"></br></br></br>
-
-
-
-<h1><font color="#1144cc">Principled Shader:</font></h1></br>
-
-Shader-Editor'a girdiğimizde ilk göreceğimiz node principled shader'dir.Blender default olarak koyar.Eskiden principled yokken tüm materiyalleri bir sürü farklı shader'ların birleşimi ile yapılırdı ama principled hepsinin bileşimi olduğu için genelde her zaman sadece bu kullanılmaya başlandı.İlk gördüğünüzde çok karmaşık gibi görülebilir ama çok basittir.
-Aşağıya genelde kullanılan özelliklerin açiklamalarını yazdım.
-</br></br></br>
-<table border="5" cellspacing="0" cellpadding="0" align="center" bgcolor="#E76D0F" bordercolor="303030">
-<tr>
-<td width="200" height="100" align="center" bgcolor="#C7C729">Base Color</td>  <td bgcolor="#4772B3" width="600" align="center">Materyal Rengi</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#A1A1A1">Subsurface</td>  <td bgcolor="#4772B3" width="600" align="center">İnsan derisi gibi materyallerde kullanılır.Eğer parmağınızı parlak bir ışığa koyduysanız kırmızı olduğunu görmüşsünüzdür.Bunu simüle eder.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#A1A1A1">Metallic</td>    <td bgcolor="#4772B3" width="600" align="center">Metaller için 1 ametaller için 0 olarak ayarlanır.Ara değerler kullanılmaz.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#A1A1A1">Specular</td>    <td bgcolor="#4772B3" width="600" align="center">Bu materyalin aynasallığını ifade ediyor ama genelde değiştirilmiyor.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#A1A1A1">Roughness</td>   <td bgcolor="#4772B3" width="600" align="center">Bu her zaman kullanılır.Materyalin parlaklığını ayarlar.Genelde Noise ya da Musgrave Texture kullanılarak kullanılır.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#A1A1A1">Sheen</td>	   <td bgcolor="#4772B3" width="600" align="center">Kumaş materyallerinde kullanılır.Çok nadir kullanılır.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#A1A1A1">Clearcoat</td>   <td bgcolor="#4772B3" width="600" align="center">Materyalı cilalı gibi yapar.Çok nadir kullanılır.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#A1A1A1">IOR</td>		   <td bgcolor="#4772B3" width="600" align="center">Eğer bir sıvı yapılıyorsa kullanılır.Her sıvının bir IOR değeri vardır.İnternetten sıvının IOR değeri bulunur ve buraya yazılır.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#A1A1A1">Transmission</td><td bgcolor="#4772B3" width="600" align="center">Saydam yapar.Cam gibi bir şey yapılacaksa kullanılır.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#C7C729">Emission</td>    <td bgcolor="#4772B3" width="600" align="center">Materyale ışık verir.</td>
-</tr>
-<tr>
-<td width="200" height="100" align="center" bgcolor="#6363C7">Normal</td>	   <td bgcolor="#4772B3" width="600" align="center">Bump ya da Normal map'ler buraya takılıyor.</td>
-</tr>
-</table>
-</br></br></br>
-
-
-</br></br><h1><font color="#1144cc">Noise Texture:</font></h1></br>
-Rasgele renklerden oluşan sonsuz büyüklükte bir görüntü verir.Aşağıda roughness ile kullanıldığında nasıl göründüğünü gösterdim.
-</br></br></br><img src="images\mat\mat11.png" width="700"></br></br></br>
-Roughness'in parlaklığı ayarladığını biliyoruz.Noise texture'ın roughness'a siyah beyaz görüntüsünü ilettiğimizde beyaz yerleri parlak siyah yerleri matlaştırıyor.
-
-</br></br></br></br>
-</br></br><h1><font color="#1144cc">Bump:</font></h1></br>
-Normal map ya da herhangi bir görüntüdeki renkleri alarak objenin normallerinin yönlerini değiştirerek hafif girinti ve çıkıntılar oluşturur.
-</br></br></br><img src="images\mat\mat12.png" width="700"></br></br></br>
-Böylelikle materyallerin nasıl yapıldığını kısaca görmüş olduk.
-</br></br></br></br></br></br>
-
-
-
-</br></br></br></br></br></br>
-<table border="1" bordercolor="#5252b6" cellspacing="0" cellpadding="0">
-<tr height="50" align="center" bgcolor="#6363C7">
-<td width="500"><a href="index.html"><font size="5" face="Comic Sans MS">Ana Sayfaya Dön</font></a></td><td width="500"><a href="sayfa4.html"><font size="5" face="Comic Sans MS">Sonraki Sayfa</font></a></td>
-</tr>
-</table>
-
-</font>
-</td>
-
-</tr>
-
-<tr>
-<td colspan="2" height="20" bgcolor="#B6430F" align="center"><font color="#862811"></br>2021-2021©Tüm Hakları Saklıdır</br></font></br></td>
-
-</tr>
-
-</table>
-
-
+<html>
+<head>
+<title>Materyaller</title>
+<link rel="icon" href="images\favicon.png" type="image/x-icon">
+<meta charset="utf-8">
+<meta name="description" content="blender">
+<meta name="keywords" content="blender,materyal,render,pokemon,pokemon top,top,değiştiriciler">
+</head>
+<body bgcolor="#94210c">
+
+<table border="1" bordercolor="#ffffff" cellspacing="0" cellpadding="0" align="center">
+<tr>
+<td colspan="2" height="220" bgcolor="#E76D0F">
+<a href="index.html"><img src="images\logomat.png" height="220"><img src="images\baslik2.png" height="220" width="1000"></a></td>
+</tr>
+
+<tr>
+<td colspan="2"  bgcolor="#6363C7" >
+<table border="3" cellspacing="0" cellpadding="0" bordercolor="#6363C7" align="center">
+<tr>                  
+<td height="50" width="300" bgcolor="#B6430F" align="center">
+<a href="sayfa1.html"><font size="5" face="verdana">Modelleme</font></a>
+</td>
+<td  width="300" bgcolor="#B6430F" align="center">
+<a href="sayfa2.html"><font size="5" face="verdana">Değiştiriciler</font></a>
+</td>
+<td  width="300" bgcolor="#B6430F" align="center">
+<a href="sayfa3.html"><font size="5" face="verdana">Materyaller</font></a>
+</td>
+<td  width="300" bgcolor="#B6430F" align="center">
+<a href="sayfa4.html"><font size="5" face="verdana">Render</font></a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td height="1200" width="200" bgcolor="#E76D0F" valign="center">
+
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+<img src="images\mat\a1prin.png" width="200" >
+
+</td>
+
+<td width="1000" bgcolor="#F5AB2F" valign="top" align="center"></br></br></br><font size="22" color="#FF1122" face="Comic Sans MS">Materyaller</font></br></br></br>
+<font size="4" face="verdana">
+
+Kısaca renk vermeyi sağlar.Node sistemi ile yapılır.Eskiden bir materyal yapmak için bir sürü shader'i birleştirip kullanmak gerekliydi ama yeni bir shader çıktı ve sadece onu kullanarak basitçe materyallerimizi yapabiliyoruz.
+Materyallerin nasıl yapıldığını yaptığımız pokemon topu üzerinden göstereceğim.
+
+<h1><font color="#1144cc">Objeye birden fazla materyal vermek:</font></h1></br>
+
+Pokemon topunda kırmızı,siyah ve beyaz olmak üzere 3 tane renk olduğu için 3 tane materyal eklememiz lazım.Bunu yapabilmemiz için materyalleri oluşturduktan sonra hangi rengin nerede olduğunu seçtikten sonra teker teker Assign etmek.</br></br>
+İlk önce objemiz 3 tane materyal alacağı için 3 tane Materyal Slotunu açmamız lazım bunun için sağ alttaki materyal ikonuna tıklayıp sağ üstteki + ya 3 defa basalım.
+</br></br></br><img src="images\mat\mat1.png" width="700"></br></br></br>  
+
+Slotları açtık.Hemen slotlara materyallerimizi eklemek için sırasıyla seçerek new+ butonuna basalım.
+</br></br></br><img src="images\mat\mat2.png" width="700"></br></br></br> 
+
+İleride aklımızın karışmaması için isimlerini değiştirelim.
+</br></br></br><img src="images\mat\mat3.png" width="700"></br></br></br> 
+
+Materyallerimizi eklemiş olduk ama blendera hangi materyale nerede olduğunu söylemediğimiz için şuan sadece en üstteki materyali kullanıyor.Diğer materyallerin nerede olduğunu göstermek için Edit moda girip kareleri seçmemiz gerek.
+</br></br></br><img src="images\mat\mat4.png" width="700"></br></br></br> 
+
+Edit moda girdikten sonra bende kırmızı materyal seçili olduğu için kırmızı olması gereken materyalleri seçtim ve sağ üstteki Assign butonuna bastım.Kareleri daha kolay seçmek için W tuşuna basalım bu sayede fare ile çoklu seçim yapabiliriz.Shift tuşuna basılı tutarak fare ile seçimleri yapalım.
+Yanlış yerdeki kareleri seçmediğinize dikkat edin.
+</br></br></br><img src="images\mat\mat5.png" width="700"></br></br></br> 
+
+Aynısını siyah için yapalım.İlk önce sağ üstten siyah materyale basalım.Ve aynı şekilde siyah kareleri seçip Assign tuşuna basalım.Aynısını beyaz içinde yapalım.
+</br></br></br><img src="images\mat\mat6.png" width="700"></br></br></br> 
+
+Materyellerin yerlerini ayarladığımıza göre hemen basitçe renklerini verelim.Kırmızı materyali seçip Base Color kısmından kırmızı yapalım.
+</br></br></br><img src="images\mat\mat7.png" width="700"></br></br></br>
+
+Siyahı seçip siyah yapalım.
+</br></br></br><img src="images\mat\mat8.png" width="700"></br></br></br>
+
+Eğer farkettiyseniz materyallerin renklerini değiştirmiş olduğumuz halde herhangi bir değişiklik olmadı.Bunun sebebi topumuza şuan Solid-Shading ile bakıyor olmamız.Bu modda her materyal gri gözükür.Renkleri görmek için sağ üstten Material-Preview modunu seçelim.
+</br></br></br><img src="images\mat\mat9.png" width="700"></br></br></br>
+
+Böylelikle topumuza basitçe 3 renk vermiş olduk.Ve aslında topumuzun modellenip renklendirilmesini bitirmiş olduk.Ama daha karmaşık materyallerin nasıl yapıldığını göstermek için kırmızı materyalimizi kullanacağım.Daha karışık materyaller için sol üstten Shader-Editor'ü seçelim.
+</br></br></br><img src="images\mat\mat10.png" width="700"></br></br></br>
+
+
+
+<h1><font color="#1144cc">Principled Shader:</font></h1></br>
+
+Shader-Editor'a girdiğimizde ilk göreceğimiz node principled shader'dir.Blender default olarak koyar.Eskiden principled yokken tüm materiyalleri bir sürü farklı shader'ların birleşimi ile yapılırdı ama principled hepsinin bileşimi olduğu için genelde her zaman sadece bu kullanılmaya başlandı.İlk gördüğünüzde çok karmaşık gibi görülebilir ama çok basittir.
+Aşağıya genelde kullanılan özelliklerin açiklamalarını yazdım.
+</br></br></br>
+<table border="5" cellspacing="0" cellpadding="0" align="center" bgcolor="#E76D0F" bordercolor="303030">
+<tr>
+<td width="200" height="100" align="center" bgcolor="#C7C729">Base Color</td>  <td bgcolor="#4772B3" width="600" align="center">Materyal Rengi</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#A1A1A1">Subsurface</td>  <td bgcolor="#4772B3" width="600" align="center">İnsan derisi gibi materyallerde kullanılır.Eğer parmağınızı parlak bir ışığa koyduysanız kırmızı olduğunu görmüşsünüzdür.Bunu simüle eder.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#A1A1A1">Metallic</td>    <td bgcolor="#4772B3" width="600" align="center">Metaller için 1 ametaller için 0 olarak ayarlanır.Ara değerler kullanılmaz.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#A1A1A1">Specular</td>    <td bgcolor="#4772B3" width="600" align="center">Bu materyalin aynasallığını ifade ediyor ama genelde değiştirilmiyor.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#A1A1A1">Roughness</td>   <td bgcolor="#4772B3" width="600" align="center">Bu her zaman kullanılır.Materyalin parlaklığını ayarlar.Genelde Noise ya da Musgrave Texture kullanılarak kullanılır.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#A1A1A1">Sheen</td>	   <td bgcolor="#4772B3" width="600" align="center">Kumaş materyallerinde kullanılır.Çok nadir kullanılır.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#A1A1A1">Clearcoat</td>   <td bgcolor="#4772B3" width="600" align="center">Materyalı cilalı gibi yapar.Çok nadir kullanılır.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#A1A1A1">IOR</td>		   <td bgcolor="#4772B3" width="600" align="center">Eğer bir sıvı yapılıyorsa kullanılır.Her sıvının bir IOR değeri vardır.İnternetten sıvının IOR değeri bulunur ve buraya yazılır.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#A1A1A1">Transmission</td><td bgcolor="#4772B3" width="600" align="center">Saydam yapar.Cam gibi bir şey yapılacaksa kullanılır.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#C7C729">Emission</td>    <td bgcolor="#4772B3" width="600" align="center">Materyale ışık verir.</td>
+</tr>
+<tr>
+<td width="200" height="100" align="center" bgcolor="#6363C7">Normal</td>	   <td bgcolor="#4772B3" width="600" align="center">Bump ya da Normal map'ler buraya takılıyor.</td>
+</tr>
+</table>
+</br></br></br>
+
+
+</br></br><h1><font color="#1144cc">Noise Texture:</font></h1></br>
+Rasgele renklerden oluşan sonsuz büyüklükte bir görüntü verir.Aşağıda roughness ile kullanıldığında nasıl göründüğünü gösterdim.
+</br></br></br><img src="images\mat\mat11.png" width="700"></br></br></br>
+Roughness'in parlaklığı ayarladığını biliyoruz.Noise texture'ın roughness'a siyah beyaz görüntüsünü ilettiğimizde beyaz yerleri parlak siyah yerleri matlaştırıyor.
+
+</br></br></br></br>
+</br></br><h1><font color="#1144cc">Bump:</font></h1></br>
+Normal map ya da herhangi bir görüntüdeki renkleri alarak objenin normallerinin yönlerini değiştirerek hafif girinti ve çıkıntılar oluşturur.
+</br></br></br><img src="images\mat\mat12.png" width="700"></br></br></br>
+Böylelikle materyallerin nasıl yapıldığını kısaca görmüş olduk.
+</br></br></br></br></br></br>
+
+
+
+</br></br></br></br></br></br>
+<table border="1" bordercolor="#5252b6" cellspacing="0" cellpadding="0">
+<tr height="50" align="center" bgcolor="#6363C7">
+<td width="500"><a href="index.html"><font size="5" face="Comic Sans MS">Ana Sayfaya Dön</font></a></td><td width="500"><a href="sayfa4.html"><font size="5" face="Comic Sans MS">Sonraki Sayfa</font></a></td>
+</tr>
+</table>
+
+</font>
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" height="20" bgcolor="#B6430F" align="center"><font color="#862811"></br>2021-2021©Tüm Hakları Saklıdır</br></font></br></td>
+
+</tr>
+
+</table>
+
+
 
  
-</body>
+</body>
 </html>

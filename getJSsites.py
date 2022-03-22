@@ -1,7 +1,7 @@
-import sys
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWebEngineWidgets import QWebEngineView
+from selenium import webdriver
+import time
+
+# start web browser
 
 
 def main():
@@ -12,23 +12,16 @@ if __name__ == "__main__":
 
 
 def getSite(site):
-    class Render(QWebEngineView):
-        def __init__(self, url):
-            self.html = None
-            self.app = QApplication(sys.argv)
-            QWebEngineView.__init__(self)
-            self.loadFinished.connect(self._loadFinished)
-            self.load(QUrl(url))
-            self.app.exec_()
+    a=r"C:\Users\batus\Desktop\web-scraping-python\chromedriver.exe"#chromedriver.exe dosyasının mutlak konumunu yazıp parametre olarak veriyoruz. bu sadece webdriver olarak chromedriver kullanıyorsak geçerli
+    browser=webdriver.Chrome(executable_path=a)
 
-        def _loadFinished(self, result):
-            # This is an async call, you need to wait for this
-            # to be called before closing the app
-            self.page().toHtml(self._callable)
+    # get source code
+    browser.get(site)
+    html = browser.page_source
+    time.sleep(2)
+    
 
-        def _callable(self, data):
-            self.html = data
-            # Data has been stored, it's safe to quit the app
-            self.app.quit()
+    # close web browser
+    browser.close()
+    return html
 
-    return Render(site).html
