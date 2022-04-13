@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
 
 def getSite(site):
-    a=r"C:\Users\batus\Desktop\web-scraping-python\chromedriver.exe"#chromedriver.exe dosyasının mutlak konumunu yazıp parametre olarak veriyoruz. bu sadece webdriver olarak chromedriver kullanıyorsak geçerli
+    a=r"/opt/homebrew/bin/chromedriver"#chromedriver.exe dosyasının mutlak konumunu yazıp parametre olarak veriyoruz. bu sadece webdriver olarak chromedriver kullanıyorsak geçerli
     browser=webdriver.Chrome(executable_path=a)
 
     # get source code
