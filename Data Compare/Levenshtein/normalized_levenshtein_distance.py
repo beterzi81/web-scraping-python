@@ -31,7 +31,7 @@ for i in dbItems:
     dataArrayFlag=0
   else:
     data=np.vstack((data,finalResult))#son olarak da her satırı ana arrayimize ekliyoruz
-os.chdir("/Users/beterzi/Desktop/3. Sınıf Güz/Web-Scraping/Data Compare/Levenshtein")
+os.chdir("./Data Compare/Levenshtein")
 np.savetxt("normalized_levenshtein_similarity_result.txt",data,delimiter=';')
 #bir txt dosyası olarak çıktı veriyoruz
 print(data)
