@@ -35,9 +35,15 @@ try:
 except FileNotFoundError:
   pass
 
-normalized_data = data / np.linalg.norm(data, axis=-1)[:, np.newaxis]
+A=100
+norm = np.linalg.norm(data)       # To find the norm of the array
+print(norm)                                # Printing the value of the norm
+normalized_data = data/norm 
+
+normalized_data=np.dot(A,normalized_data)
 
 np.savetxt("levenshtein_similarity_result.txt",normalized_data,delimiter=';',fmt='%1.6f')
 #bir txt dosyası olarak çıktı veriyoruz
+print(data)
 print(normalized_data)
 
