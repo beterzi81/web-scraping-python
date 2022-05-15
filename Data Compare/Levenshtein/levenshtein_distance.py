@@ -3,6 +3,7 @@ import numpy as np
 import sqlite3
 import os
 
+
 data=np.array([],dtype=float)
 dataArrayFlag=1
 
@@ -29,8 +30,14 @@ for i in dbItems:
     dataArrayFlag=0
   else:
     data=np.vstack((data,finalResult))#son olarak da her satırı ana arrayimize ekliyoruz
-os.chdir("./Data Compare/Levenshtein")
-np.savetxt("levenshtein_similarity_result.txt",data,delimiter=';',fmt='%1.2f')
+try:
+  os.chdir("./Data Compare/Levenshtein")
+except FileNotFoundError:
+  pass
+
+normalized_data = data / np.linalg.norm(data, axis=-1)[:, np.newaxis]
+
+np.savetxt("levenshtein_similarity_result.txt",normalized_data,delimiter=';',fmt='%1.6f')
 #bir txt dosyası olarak çıktı veriyoruz
-print(data)
+print(normalized_data)
 
