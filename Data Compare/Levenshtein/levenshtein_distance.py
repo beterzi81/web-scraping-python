@@ -10,7 +10,7 @@ dataArrayFlag=1
 databaseConnect = sqlite3.connect('siteler.db')#veritabanına bağlandık
 databaseConnect.row_factory = lambda cursor, row: row[0]#bu satırın sebebi şu, id değerlerini döndürmek istediğimizde tuple veri tipinde (12,) şeklinde bir tuple döndürüyordu. bu lambda ile her döndürülen tuple'ın ilk elemanını yani id'mizi alıyor.
 cursor = databaseConnect.cursor()#cursorımızı oluşturuk
-dbItems = cursor.execute('SELECT dosya_icerigi FROM siteler').fetchall()#bütün id değerlerini aldık,
+dbItems = cursor.execute('SELECT  FROM siteler').fetchall()#bütün id değerlerini aldık,
 dbItems.sort()#id değerleri sırasız geliyordu sıraladık
 a=1
 b=1
